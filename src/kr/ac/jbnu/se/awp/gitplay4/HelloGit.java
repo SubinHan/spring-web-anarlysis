@@ -14,11 +14,11 @@ public class HelloGit {
 		}
 		// I added the following part.
 		System.out.println("This is a confliction test.");
-		System.out.println("This is a jimin's test. follow me");
+		System.out.println("This is a jimin's test. follow me. something changed");
 		
 		
 	}
 	// add comment: This is Hello Git.
-	// 1ºü Á¤Áö¹Î¤¾¤¾
+	// 1ÂºÃ¼ ÃÂ¤ÃÃ¶Â¹ÃÂ¤Â¾Â¤Â¾
 
 }
