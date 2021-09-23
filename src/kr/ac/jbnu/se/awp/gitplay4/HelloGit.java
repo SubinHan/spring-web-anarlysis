@@ -14,7 +14,7 @@ public class HelloGit {
 		}
 		// I added the following part.
 		System.out.println("This is a confliction test.");
-		System.out.println("This is a jimin's test.");
+		System.out.println("This is a jimin's test. follow me");
 		
 		
 	}
