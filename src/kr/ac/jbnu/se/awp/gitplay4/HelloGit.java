@@ -4,7 +4,7 @@ public class HelloGit {
 	public static void main(String[] args) {
 		System.out.println("Hello Git!!");
 		
-		System.out.println("Hello Git 1");
+		System.out.println("Hello Git 2");
 		
 		// Okay I'll change this part as below:
 		// I've just addd the following part in Eclipse.
