@@ -4,7 +4,7 @@ public class HelloGit {
 	public static void main(String[] args) {
 		System.out.println("Hello Git!!");
 		
-		System.out.println("Hello Git ???");
+		System.out.println("Hello Git 1");
 		
 		// Okay I'll change this part as below:
 		// I've just addd the following part in Eclipse.
@@ -14,7 +14,7 @@ public class HelloGit {
 		}
 		// I added the following part.
 		System.out.println("This is a confliction test.");
-		System.out.println("This is a jimin's test. follow me. something changed");
+		System.out.println("This is a jimin's test. follow me.");
 		
 		
 	}
