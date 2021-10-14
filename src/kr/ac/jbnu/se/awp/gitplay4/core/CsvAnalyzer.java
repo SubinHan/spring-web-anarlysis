@@ -10,8 +10,8 @@ import kr.ac.jbnu.se.awp.gitplay4.model.Attribute;
 public class CsvAnalyzer {
 
 	private Attribute col[];
-	private int colnum;
-	private int rownum;
+	private int numCol;
+	private int numRow;
 	
 	public CsvAnalyzer(String path, Boolean header){	
 		String line = "";
@@ -23,34 +23,33 @@ public class CsvAnalyzer {
 			// 열의 개수 구해서 저장
 			line = br.readLine();
 			String[] values = line.split(",");
-			colnum = values.length;
+			numCol = values.length;
 			
 			// 배열 할당
-			col = new Attribute[colnum];
-			for(int i=0; i<colnum; i++) {
+			col = new Attribute[numCol];
+			for(int i=0; i<numCol; i++) {
 				col[i] = new Attribute();
 			}
 			
 			// 헤더 저장
 			if(header==true) {
 				values = line.split(",");
-				for(int i=0; i<colnum; i++) {
+				for(int i=0; i<numCol; i++) {
 					col[i].setName(values[i]);
 				}
 			}
-			
 			else {
-				for(int i=0; i<colnum; i++) {
-					col[i].setName(i+1);
-					col[i].setData(values[i]);
+				for(int i=0; i<numCol; i++) {
+					col[i].setName("column" + (i+1));
+					col[i].addData(values[i]);
 				}
 			}
 			
 			// 데이터 저장
 			while((line=br.readLine()) != null) {
 				values = line.split(",");				
-				for(int i=0; i<colnum; i++) {
-					col[i].setData(values[i]);
+				for(int i=0; i<numCol; i++) {
+					col[i].addData(values[i]);
 				}
 			}
 		} catch (FileNotFoundException e) {
@@ -74,52 +73,51 @@ public class CsvAnalyzer {
 //		for(int )
 //	}
 	
-	public void getColnum() {
-		System.out.println("열의 개수 : " + colnum);
+	public int getNumOfColumn() {
+		return numCol;
 	}
 	
-	public void getRownum() {
-		System.out.println("행의 개수 : " + rownum);
+	public int getNumOfRow() {
+		return numRow;
 	}
 	
-	public void getColname() {
-		for(int i=0; i<colnum; i++)
-			System.out.print(col[i].getName()+ " ");
+	public String getColumnName(int index) {
+		return col[index].getName();
 	}
 	
-	public void getCol(int[] idx, int rownum) {
-		for(int i=0; i<idx.length; i++) {
-			System.out.print(col[idx[i]].getName()+" ");
-		}
-		System.out.println();
-		
-		for(int j=0; j<rownum; j++) {
-			for(int i=0; i<idx.length; i++) {
-				System.out.print(col[idx[i]].getData(j)+ " ");
-			}
-			System.out.println();
-		}
-	}
+//	public void getCol(int[] idx, int rownum) {
+//		for(int i=0; i<idx.length; i++) {
+//			System.out.print(col[idx[i]].getName()+" ");
+//		}
+//		System.out.println();
+//		
+//		for(int j=0; j<rownum; j++) {
+//			for(int i=0; i<idx.length; i++) {
+//				System.out.print(col[idx[i]].getData(j)+ " ");
+//			}
+//			System.out.println();
+//		}
+//	}
+//	
+//	public void getRow(int[] idx) {
+//		for (int j=0; j<idx.length; j++) {
+//			for(int i=0; i<numCol; i++) {
+//				System.out.print(col[i].getData(idx[j])+" ");
+//			}
+//			System.out.println();
+//		}
+//	}
 	
-	public void getRow(int[] idx) {
-		for (int j=0; j<idx.length; j++) {
-			for(int i=0; i<colnum; i++) {
-				System.out.print(col[i].getData(idx[j])+" ");
-			}
-			System.out.println();
-		}
-	}
-	
-	public void head() {
-		for(int i=0; i<colnum; i++) {
-			System.out.print(col[i].getName()+" ");
-		}
-		System.out.println();
-		for(int j=0; j<6 ; j++) {
-			for(int i=0; i<colnum; i++) {
-				System.out.print(col[i].getData(j)+ " ");
-			}
-			System.out.println();
-		}
-	}
+//	public void head() {
+//		for(int i=0; i<numCol; i++) {
+//			System.out.print(col[i].getName()+" ");
+//		}
+//		System.out.println();
+//		for(int j=0; j<6 ; j++) {
+//			for(int i=0; i<numCol; i++) {
+//				System.out.print(col[i].getData(j)+ " ");
+//			}
+//			System.out.println();
+//		}
+//	}
 }

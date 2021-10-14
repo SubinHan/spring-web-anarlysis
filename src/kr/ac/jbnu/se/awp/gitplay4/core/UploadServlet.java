@@ -20,6 +20,7 @@ public class UploadServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		
 		// 업로드 경로
 		String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIR;
 		// getServlet().getRealPath("") 단점

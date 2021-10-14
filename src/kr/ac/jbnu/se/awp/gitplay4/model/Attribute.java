@@ -14,7 +14,7 @@ public class Attribute {
 		na_array = new HashSet<Integer>();
 	}
 	
-	public void setData(String data) {
+	public void addData(String data) {
 		this.data.add(data);
 	}
 	
@@ -22,17 +22,9 @@ public class Attribute {
 		this.name = name;
 	}
 	
-	public void setName(int i) {
-		name = "column" + i;
-	}
-	
-	public void setNa_array(int na) {
+	public void addNa_array(int na) {
 		na_array.add(na);
 	}
-	
-	public void setNum() {
-		num = data.size();
-	} 
 	
 	public String getData(int i) {
 		return data.get(i);
