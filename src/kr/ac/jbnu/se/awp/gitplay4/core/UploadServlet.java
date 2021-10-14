@@ -19,12 +19,10 @@ public class UploadServlet extends HttpServlet {
 	
 	private String UPLOAD_DIR;
 	private String uploadPath;
-	private CsvManager manager;
- 	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		manager = new CsvManager();
-		UPLOAD_DIR = manager.getUserIP(req);
+		UPLOAD_DIR = getUserIP(req);
 		// 업로드 경로
 		uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIR;
 		// getServlet().getRealPath("") 단점
@@ -75,6 +73,32 @@ public class UploadServlet extends HttpServlet {
 		}
 		return null; // filename이 없는 경우 (폼필드 데이터인 경우):
 	}
+	
+	//* 철민 : 브라우저 접속시 실제 아이피를 넣어서 접속하는지???, 동일 아이피의 경우 식별자를 어떻게 결정할지???
+	private String getUserIP(HttpServletRequest request) {
+		String ip = request.getHeader("X-Forwarded-For"); //client's real ip
+		 
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {                    
+		     ip = request.getHeader("Proxy-Client-IP");
+		}
+		 
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		     ip = request.getHeader("WL-Proxy-Client-IP");
+		}
+		 
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		     ip = request.getHeader("HTTP_CLIENT_IP");
+		}
+		 
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		     ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+		}
+		 
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		     ip = request.getRemoteHost();
+		}
+		    return ip;
+		}
 	
 	//* 파일의 경로 반환 
 	public String getFilePath() {	
