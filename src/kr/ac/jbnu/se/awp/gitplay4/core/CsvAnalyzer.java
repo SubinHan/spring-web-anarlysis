@@ -85,6 +85,14 @@ public class CsvAnalyzer {
 		return col[index].getName();
 	}
 	
+	public String[] getColumnNames() {
+		String[] columnNames = new String[numCol];
+		for(int i = 0; i < numCol; i++) {
+			columnNames[i] = col[i].getName();	
+		}
+		return columnNames;
+	}
+	
 //	public void getCol(int[] idx, int rownum) {
 //		for(int i=0; i<idx.length; i++) {
 //			System.out.print(col[idx[i]].getName()+" ");
