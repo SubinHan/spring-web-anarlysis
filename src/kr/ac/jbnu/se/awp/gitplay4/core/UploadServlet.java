@@ -22,6 +22,8 @@ public class UploadServlet extends HttpServlet {
 		CsvManager.addFile(getUserIP(req), req);
 		
 		System.out.println(CsvManager.getRecentFile(getUserIP(req)));
+		
+		this.getServletContext().getRequestDispatcher("/TestUpload.jsp").forward(req, resp);
 	} // doPost()
 
 

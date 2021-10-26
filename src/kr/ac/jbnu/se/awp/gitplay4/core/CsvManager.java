@@ -13,19 +13,18 @@ public class CsvManager {
 
 	public static void addFile(String id, HttpServletRequest req) {
 		String UPLOAD_DIR = id;
-		// ¾÷·Îµå °æ·Î
+		// ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½
 		String uploadPath = BASE_DIR + UPLOAD_DIR;
 		
 		String fileName = "";
 		try {
-			for (Part part : req.getParts()) { // req.getParts() : Multipartµ¥ÀÌÅÍµéÀ» Part°´Ã¼·Î ¸®ÅÏ
-				fileName = getFileName(part); // ÆÄÀÏ¸íÀ» °¡Á®¿ÍÁÖ´Â ¸Þ¼Òµå ½ÇÇà
+			for (Part part : req.getParts()) { // req.getParts() : Multipartï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ Partï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+				fileName = getFileName(part); // ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½Þ¼Òµï¿½ ï¿½ï¿½ï¿½ï¿½
 				System.out.println(fileName);
-				System.out.println(part.getHeader("content-disposition")); // part¸¶´Ù header ÀÖÀ½
-				if (fileName != null && !"".equals(fileName)) { // !ÆûÇÊµå°æ¿ì && !ÆÄÀÏ¾Æ¿¹¾÷·Îµå ¾ÈÇßÀ» ¶§
+				System.out.println(part.getHeader("content-disposition")); // partï¿½ï¿½ï¿½ï¿½ header ï¿½ï¿½ï¿½ï¿½
+				if (fileName != null && !"".equals(fileName)) {
 					makeDir(uploadPath);
-					part.write(uploadPath + File.separator + fileName); // ÆÄÀÏ ÀúÀå
-					System.out.println("ÆÄÀÏ¸í : " + fileName + "ÀúÀå¿Ï·á!!!");
+					part.write(uploadPath + File.separator + fileName); 
 				}
 
 			}
@@ -50,7 +49,7 @@ public class CsvManager {
 				return filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1);
 			}
 		}
-		return null; // filenameÀÌ ¾ø´Â °æ¿ì (ÆûÇÊµå µ¥ÀÌÅÍÀÎ °æ¿ì):
+		return null; // filenameï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½Êµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½):
 	}
 	
 	public static File getLastModified(String directoryFilePath)
