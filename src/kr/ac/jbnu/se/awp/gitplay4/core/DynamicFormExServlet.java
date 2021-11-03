@@ -14,6 +14,7 @@ public class DynamicFormExServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 		
 		String path, xAxis, yAxis, saveDirectoryPath;
 		path = CsvManager.getRecentCsv(CsvManager.getUserIP(req)).getPath();
@@ -24,6 +25,5 @@ public class DynamicFormExServlet extends HttpServlet {
 		LineGenerator generator = new LineGenerator(path, xAxis, yAxis, saveDirectoryPath);
 		generator.makeLine();
 	}
-	
-	
+
 }

@@ -20,7 +20,7 @@ public class UploadServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		CsvManager.addFile(CsvManager.getUserIP(req), req);
-		
+
 		System.out.println(CsvManager.getRecentFile(CsvManager.getUserIP(req)));
 	} // doPost()
 
