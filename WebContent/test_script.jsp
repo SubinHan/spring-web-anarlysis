@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <script langnuage="JavaScript">
         function addDiv(){
         	var container = document.getElementById('container');
@@ -21,12 +22,10 @@
 </head>
 <body>
 <form action="LoginS" method="post">  
-    <button type="button"  onclick="addDiv();">Generate</button>
+    <button type="button" onclick="addDiv();">Generate</button>
     <div id="container">
     </div>
-    <form>
-    
-    </form>
+  
 </form>
 </body>
 </html>

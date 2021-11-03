@@ -16,6 +16,10 @@ public class DynamicFormExServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println(req.getParameter("xAxis"));
 		System.out.println(Arrays.toString(req.getParameterValues("yAxis")));
+		
+		this.getServletContext().getRequestDispatcher("/test_extract_image.jsp").forward(req, resp);
 	}
+	
+	
 	
 }
