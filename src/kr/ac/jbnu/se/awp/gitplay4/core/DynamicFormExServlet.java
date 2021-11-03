@@ -24,6 +24,8 @@ public class DynamicFormExServlet extends HttpServlet {
 		
 		LineGenerator generator = new LineGenerator(path, xAxis, yAxis, saveDirectoryPath);
 		generator.makeLine();
+		
+		this.getServletContext().getRequestDispatcher("/test_extract_image.jsp").forward(req, resp);
 	}
 
 }

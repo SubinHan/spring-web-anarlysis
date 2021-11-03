@@ -4,11 +4,11 @@
 <head>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
-<%@ page import="java.util.*,java.io.*"%>
+<%@ page import="java.util.*,java.io.*,kr.ac.jbnu.se.awp.gitplay4.core.CsvManager"%>
 <%@ page import="java.sql.*"%>
 
 <%
-	String fullpath = "C:/Users/cmkxak/Desktop/web/sonheungmin.jpg";
+	String fullpath = CsvManager.getRecentChartFile(CsvManager.getUserIP(request)).getPath();
 %>
 
 <title>Insert title here</title>

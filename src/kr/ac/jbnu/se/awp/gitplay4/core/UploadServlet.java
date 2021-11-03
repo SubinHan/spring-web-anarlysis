@@ -12,16 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-
 @WebServlet(name = "UploadServlet", urlPatterns = { "/UploadServlet" })
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 public class UploadServlet extends HttpServlet {
-	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		CsvManager.addFile(CsvManager.getUserIP(req), req);
 
-		System.out.println(CsvManager.getRecentFile(CsvManager.getUserIP(req)));
+		this.getServletContext().getRequestDispatcher("/dynamicform.jsp").forward(req, resp);
 	} // doPost()
 
 } // class
