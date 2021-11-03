@@ -14,8 +14,16 @@ public class DynamicFormExServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println(req.getParameter("xAxis"));
-		System.out.println(Arrays.toString(req.getParameterValues("yAxis")));
+		
+		String path, xAxis, yAxis, saveDirectoryPath;
+		path = CsvManager.getRecentCsv(CsvManager.getUserIP(req)).getPath();
+		xAxis = req.getParameter("xAxis");
+		yAxis = req.getParameter("yAxis");
+		saveDirectoryPath = CsvManager.getChartFolderPath(CsvManager.getUserIP(req));
+		
+		LineGenerator generator = new LineGenerator(path, xAxis, yAxis, saveDirectoryPath);
+		generator.makeLine();
 	}
+	
 	
 }

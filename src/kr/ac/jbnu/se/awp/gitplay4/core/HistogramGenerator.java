@@ -12,14 +12,17 @@ import org.rosuda.REngine.Rserve.RserveException;
 public class HistogramGenerator extends ChartGenerator{
 
 	
+	public HistogramGenerator(String path, String xAxis, String yAxis, String saveDirectoryPath) {
+		super(path, xAxis, yAxis, saveDirectoryPath);
+	}
+
 	public void makeHistogram() {
 		
 		//RConnection connection = null;
 		try {
 			connection = new RConnection();
 	
-			connection.eval("csv_data <- read.csv(\""+filePath +"\",header=TRUE)");
-			
+			connection.eval("csv_data <- read.csv(\""+saveDirectoryPath +"\",header=TRUE)");
 			
 			connection.eval("library(ggplot2)");
 			connection.eval("library(dplyr)");
@@ -32,6 +35,7 @@ public class HistogramGenerator extends ChartGenerator{
 					+ "+ theme_light()"
 					+ "+ theme(plot.title = element_text(size=20, hjust=0.5))");
 			
+			connection.eval("setwd("+saveDirectoryPath+")");
 			connection.eval("ggsave(filename=\""+imageName+"\", plot=a, width=12,height=6)");
 			
 			System.out.println(imageName + " Histogram Making Clear");

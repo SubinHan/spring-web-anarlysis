@@ -11,16 +11,27 @@ import org.rosuda.REngine.Rserve.RserveException;
 
 public class LineGenerator extends ChartGenerator{
 	
+	public LineGenerator(String path, String xAxis, String yAxis, String saveDirectoryPath) {
+		super(path, xAxis, yAxis, saveDirectoryPath);
+	}
+
 	public void makeLine() {
 
 		try {
 			connection = new RConnection();
-	
-			connection.eval("csv_data <- read.csv("+rfilePath +",header=TRUE)");
 			
+			System.out.println("csv_data <- read.csv(" + rfilePath + ",header=TRUE)");
+			connection.eval("csv_data <- read.csv(" + rfilePath + ",header=TRUE)");
 			
 			connection.eval("library(ggplot2)");
 			connection.eval("library(dplyr)");
+			
+			System.out.println("a<-csv_data%>% ggplot(aes("+x+", "+y+", group=1))"
+					+ "+ geom_line(color = 'coral')"
+					+ "+ ggtitle(\""+imageTitle+"\")"
+					+ "+ xlab(\""+xName+"\")+ylab(\""+yName+"\")"
+					+ "+ theme_light()"
+					+ "+ theme(plot.title = element_text(size=20, hjust=0.5))");
 			
 			connection.eval("a<-csv_data%>% ggplot(aes("+x+", "+y+", group=1))"
 					+ "+ geom_line(color = 'coral')"
@@ -28,6 +39,8 @@ public class LineGenerator extends ChartGenerator{
 					+ "+ xlab(\""+xName+"\")+ylab(\""+yName+"\")"
 					+ "+ theme_light()"
 					+ "+ theme(plot.title = element_text(size=20, hjust=0.5))");
+			
+			connection.eval("setwd("+saveDirectoryPath+")");
 			connection.eval("ggsave(filename=\""+imageName+"\", plot=a, width=12,height=6)");
 			
 			System.out.println(imageName + " Line Making Clear");

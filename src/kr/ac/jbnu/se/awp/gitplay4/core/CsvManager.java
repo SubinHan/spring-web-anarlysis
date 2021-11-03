@@ -10,22 +10,26 @@ import javax.servlet.http.Part;
 
 public class CsvManager {
 	public static final String BASE_DIR = "C:/";
+	public static final String CSV_DIR = "/csv";
+	public static final String CHART_DIR = "/chart";
 
 	public static void addFile(String id, HttpServletRequest req) {
 		String UPLOAD_DIR = id;
-		// ¾÷·Îµå °æ·Î
+		// ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½
 		String uploadPath = BASE_DIR + UPLOAD_DIR;
-		
+		makeDir(uploadPath);
+		uploadPath += CSV_DIR;
+		makeDir(uploadPath);
+
 		String fileName = "";
 		try {
-			for (Part part : req.getParts()) { // req.getParts() : Multipartµ¥ÀÌÅÍµéÀ» Part°´Ã¼·Î ¸®ÅÏ
-				fileName = getFileName(part); // ÆÄÀÏ¸íÀ» °¡Á®¿ÍÁÖ´Â ¸Þ¼Òµå ½ÇÇà
+			for (Part part : req.getParts()) { // req.getParts() : Multipartï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ Partï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+				fileName = getFileName(part); // ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½Þ¼Òµï¿½ ï¿½ï¿½ï¿½ï¿½
 				System.out.println(fileName);
-				System.out.println(part.getHeader("content-disposition")); // part¸¶´Ù header ÀÖÀ½
-				if (fileName != null && !"".equals(fileName)) { // !ÆûÇÊµå°æ¿ì && !ÆÄÀÏ¾Æ¿¹¾÷·Îµå ¾ÈÇßÀ» ¶§
-					makeDir(uploadPath);
-					part.write(uploadPath + File.separator + fileName); // ÆÄÀÏ ÀúÀå
-					System.out.println("ÆÄÀÏ¸í : " + fileName + "ÀúÀå¿Ï·á!!!");
+				System.out.println(part.getHeader("content-disposition")); // partï¿½ï¿½ï¿½ï¿½ header ï¿½ï¿½ï¿½ï¿½
+				if (fileName != null && !"".equals(fileName)) { // !ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ && !ï¿½ï¿½ï¿½Ï¾Æ¿ï¿½ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+					part.write(uploadPath + File.separator + fileName); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+					System.out.println("ï¿½ï¿½ï¿½Ï¸ï¿½ : " + fileName + "ï¿½ï¿½ï¿½ï¿½Ï·ï¿½!!!");
 				}
 
 			}
@@ -33,6 +37,10 @@ public class CsvManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public static File getRecentChartFile(String id) {
+		return getLastModified(BASE_DIR + id + CHART_DIR);
 	}
 
 	private static void makeDir(String uploadPath) {
@@ -42,6 +50,10 @@ public class CsvManager {
 	public static File getRecentFile(String id) {
 		return getLastModified(BASE_DIR + id);
 	}
+	
+	public static File getRecentCsv(String id) {
+		return getLastModified(BASE_DIR + id + CSV_DIR);
+	}
 
 	private static String getFileName(Part part) {
 		for (String content : part.getHeader("content-disposition").split(";")) {
@@ -50,28 +62,55 @@ public class CsvManager {
 				return filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1);
 			}
 		}
-		return null; // filenameÀÌ ¾ø´Â °æ¿ì (ÆûÇÊµå µ¥ÀÌÅÍÀÎ °æ¿ì):
+		return null; // filenameï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½Êµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½):
 	}
-	
-	public static File getLastModified(String directoryFilePath)
-	{
-	    File directory = new File(directoryFilePath);
-	    File[] files = directory.listFiles(File::isFile);
-	    long lastModifiedTime = Long.MIN_VALUE;
-	    File chosenFile = null;
 
-	    if (files != null)
-	    {
-	        for (File file : files)
-	        {
-	            if (file.lastModified() > lastModifiedTime)
-	            {
-	                chosenFile = file;
-	                lastModifiedTime = file.lastModified();
-	            }
-	        }
-	    }
+	public static File getLastModified(String directoryFilePath) {
+		File directory = new File(directoryFilePath);
+		File[] files = directory.listFiles(File::isFile);
+		long lastModifiedTime = Long.MIN_VALUE;
+		File chosenFile = null;
 
-	    return chosenFile;
+		if (files != null) {
+			for (File file : files) {
+				if (file.lastModified() > lastModifiedTime) {
+					chosenFile = file;
+					lastModifiedTime = file.lastModified();
+				}
+			}
+		}
+
+		return chosenFile;
+	}
+
+	public static String getUserIP(HttpServletRequest request) {
+		String ip = request.getHeader("X-Forwarded-For"); // client's real ip
+
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("Proxy-Client-IP");
+		}
+
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("WL-Proxy-Client-IP");
+		}
+
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("HTTP_CLIENT_IP");
+		}
+
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+		}
+
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getRemoteHost();
+		}
+		return ip;
+	}
+
+	public static String getChartFolderPath(String id) {
+		String directory =  BASE_DIR + id + CHART_DIR;
+		makeDir(directory);
+		return directory;
 	}
 }
