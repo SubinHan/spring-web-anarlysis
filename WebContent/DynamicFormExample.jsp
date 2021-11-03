@@ -31,7 +31,7 @@
 			<option><%=name%>
 			</option>
 			<%
-			}
+			} 
 			%>
 		</select>
 
