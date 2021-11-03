@@ -19,37 +19,9 @@ public class UploadServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		CsvManager.addFile(getUserIP(req), req);
-		
-		System.out.println(CsvManager.getRecentFile(getUserIP(req)));
-		
-		this.getServletContext().getRequestDispatcher("/dynamicform.jsp").forward(req, resp);
-		
+		CsvManager.addFile(CsvManager.getUserIP(req), req);
+
+		System.out.println(CsvManager.getRecentFile(CsvManager.getUserIP(req)));
 	} // doPost()
 
-
-	private String getUserIP(HttpServletRequest request) {
-		String ip = request.getHeader("X-Forwarded-For"); //client's real ip
-		 
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {                    
-		     ip = request.getHeader("Proxy-Client-IP");
-		}
-		 
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-		     ip = request.getHeader("WL-Proxy-Client-IP");
-		}
-		 
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-		     ip = request.getHeader("HTTP_CLIENT_IP");
-		}
-		 
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-		     ip = request.getHeader("HTTP_X_FORWARDED_FOR");
-		}
-		 
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-		     ip = request.getRemoteHost();
-		}
-		    return ip;
-		}
 } // class

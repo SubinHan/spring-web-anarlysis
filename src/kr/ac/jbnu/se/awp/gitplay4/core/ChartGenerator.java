@@ -11,6 +11,7 @@ import org.rosuda.REngine.Rserve.RserveException;
 //import javax.servlet.http.HttpServletRequest;
 
 
+
 public class ChartGenerator {
 	//this class is parent class of line, bar, ~ class
 	//getting parameter, preprocessing
@@ -23,8 +24,8 @@ public class ChartGenerator {
 	protected  String downloadPath ="C:/Users/jimin/vscode-workspace/Web_with_R/userFile/";
 	protected  String userIP = "3530916043";
 	protected  String userfilename = "3530916043.csv";
-	protected  String filePath = downloadPath.concat(userIP).concat("/").concat(userfilename);
-	protected  String rfilePath= "\"" + filePath +"\"";
+	protected  String saveDirectoryPath;
+	protected  String rfilePath= "\"" + downloadPath +"\"";
 	protected  String imageTitle = "Temperature";
 	protected  String imageName = imageTitle.concat(".png");
 	protected  String x = "수집시간";
@@ -34,6 +35,19 @@ public class ChartGenerator {
 	protected  String outlierName = "온도";
 	protected  String outlierRange_start = "30";
 	protected  String outlierRange_end = "50";
+	
+	public ChartGenerator(String csvPath, String xAxis, String yAxis, String saveDirectoryPath) {
+		this.downloadPath = csvPath.replace("\\", "/");
+		this.rfilePath = "\"" + downloadPath +"\"";
+		this.x = xAxis;
+		this.y = yAxis;
+		this.xName = xAxis;
+		this.yName = yAxis;
+		this.saveDirectoryPath = saveDirectoryPath.replace("\\", "/");
+		this.saveDirectoryPath = "\"" + saveDirectoryPath + "\"";
+		System.out.println(this.saveDirectoryPath);
+	}
+	
 
 	
 	//it also will be changed because of difference of the number of x,y parameters
@@ -42,6 +56,7 @@ public class ChartGenerator {
 		
 		try {
 			connection = new RConnection();
+			
 			connection.eval("csv_data <- read.csv("+rfilePath +",header=TRUE)");
 			connection.eval("csv_data <- subset(csv_data, "+outlierName+">"+outlierRange_start+" &"+outlierName+"<"+outlierRange_end+")");
 			connection.eval("setwd(\""+downloadPath+"/"+userIP+"\")");
@@ -56,6 +71,5 @@ public class ChartGenerator {
 			connection.close();
 		}
 	}
-	
 }
 
