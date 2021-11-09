@@ -4,11 +4,11 @@
 <head>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
-<%@ page import="java.util.*,java.io.*,kr.ac.jbnu.se.awp.gitplay4.core.CsvManager"%>
+<%@ page import="java.util.*,java.io.*,kr.ac.jbnu.se.awp.gitplay4.core.FileManager"%>
 <%@ page import="java.sql.*"%>
 
 <%
-	String fullpath = CsvManager.getRecentChartFile(CsvManager.getUserIP(request)).getPath();
+	String fullpath = FileManager.getRecentChartFile(FileManager.getUserIP(request)).getPath();
 %>
 
 <title>Insert title here</title>
