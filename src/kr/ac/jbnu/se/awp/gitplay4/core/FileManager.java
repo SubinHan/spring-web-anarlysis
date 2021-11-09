@@ -8,14 +8,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 
-public class CsvManager {
+public class FileManager {
 	public static final String BASE_DIR = "C:/";
 	public static final String CSV_DIR = "/csv";
 	public static final String CHART_DIR = "/chart";
 
 	public static void addFile(String id, HttpServletRequest req) {
 		String UPLOAD_DIR = id;
-		// ���ε� ���
+		// ���ε� ���?
 		String uploadPath = BASE_DIR + UPLOAD_DIR;
 		makeDir(uploadPath);
 		uploadPath += CSV_DIR;
@@ -29,7 +29,7 @@ public class CsvManager {
 				System.out.println(part.getHeader("content-disposition")); // part���� header ����
 				if (fileName != null && !"".equals(fileName)) { // !���ʵ��� && !���Ͼƿ����ε� ������ ��
 					part.write(uploadPath + File.separator + fileName); // ���� ����
-					System.out.println("���ϸ� : " + fileName + "����Ϸ�!!!");
+					System.out.println("���ϸ� : " + fileName + "����Ϸ�?!!!");
 				}
 
 			}
@@ -62,7 +62,7 @@ public class CsvManager {
 				return filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1);
 			}
 		}
-		return null; // filename�� ���� ��� (���ʵ� �������� ���):
+		return null; // filename�� ���� ���? (���ʵ� �������� ���?):
 	}
 
 	public static File getLastModified(String directoryFilePath) {

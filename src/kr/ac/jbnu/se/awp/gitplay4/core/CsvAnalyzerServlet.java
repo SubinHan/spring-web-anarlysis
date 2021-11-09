@@ -10,17 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "DynamicFormExServlet", urlPatterns = { "/DynamicFormExServlet" })
-public class DynamicFormExServlet extends HttpServlet {
+public class CsvAnalyzerServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		
 		String path, xAxis, yAxis, saveDirectoryPath;
-		path = CsvManager.getRecentCsv(CsvManager.getUserIP(req)).getPath();
+		path = FileManager.getRecentCsv(FileManager.getUserIP(req)).getPath();
 		xAxis = req.getParameter("xAxis");
 		yAxis = req.getParameter("yAxis");
-		saveDirectoryPath = CsvManager.getChartFolderPath(CsvManager.getUserIP(req));
+		saveDirectoryPath = FileManager.getChartFolderPath(FileManager.getUserIP(req));
 		
 		LineGenerator generator = new LineGenerator(path, xAxis, yAxis, saveDirectoryPath);
 		generator.makeLine();

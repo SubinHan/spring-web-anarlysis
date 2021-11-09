@@ -18,7 +18,7 @@ public class UploadServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		CsvManager.addFile(CsvManager.getUserIP(req), req);
+		FileManager.addFile(FileManager.getUserIP(req), req);
 
 		this.getServletContext().getRequestDispatcher("/dynamicform.jsp").forward(req, resp);
 	} // doPost()
