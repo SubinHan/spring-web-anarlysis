@@ -16,7 +16,7 @@ public class HistogramGenerator extends ChartGenerator{
 		super(path, xAxis, yAxis, saveDirectoryPath);
 	}
 
-	public void makeHistogram() {
+	public void generate() {
 		
 		//RConnection connection = null;
 		try {

@@ -12,7 +12,7 @@ import org.rosuda.REngine.Rserve.RserveException;
 
 
 
-public class ChartGenerator {
+public abstract class ChartGenerator {
 	//this class is parent class of line, bar, ~ class
 	//getting parameter, preprocessing
 	
@@ -71,5 +71,7 @@ public class ChartGenerator {
 			connection.close();
 		}
 	}
+
+	public abstract void generate();
 }
 
