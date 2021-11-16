@@ -7,7 +7,7 @@
 <title>회원가입</title>
 </head>
 <body>
-	<form action="joinOk.jsp" method="post">
+	<form action="RegistrationServlet" method="post">
 	
 	<table width="400" align="center" border="1">
 		<tr><th colsapn="2">회원가입</th></tr>
