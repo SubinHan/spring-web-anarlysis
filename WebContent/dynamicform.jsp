@@ -61,9 +61,8 @@ int givenColNum;
 				<legend>범위 설정</legend>
 				<input type="text" name="ymax"> ~ <input type="text"
 					name="ymin">
-			</fieldset>
-		</form>
-		<input type="submit" value="Confirm">
+			</fieldset>		
+			<input type="submit" value="Confirm">
 		</form>
 	</div>
 </body>
