@@ -4,14 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>login</title>
+<title>회원가입</title>
 </head>
 <body>
-	<form action="LoginServlet" method="post">
+	<form action="RegistrationServlet" method="post">
 	
-	<table width="400" align="center" border="1" cellspacing="0" cellpadding="5"]>
-	
-		<tr><td colspan ="2" align="center">로그인</td></tr>
+	<table width="400" align="center" border="1">
+		<tr><th colsapn="2">회원가입</th></tr>
 		<tr>
 			<td width ="200" align="center">아이디</td>
 			<td width ="200" align="center"><input type="text" name="id"/></td>
@@ -21,12 +20,9 @@
 			<td width ="200" align="center"><input type="text" name="password"/></td>
 		</tr>
 		<tr>
-			<td colspan ="1" align="center"><input type="button" value="회원가입하기" onclick=" location='joinPage.jsp'"/></td>
-			
-			<td colspan ="1" align="center"><input type="submit" value="로그인하기"/></td>
+			<td colspan ="2" align="center"><input type="submit" value="회원가입하기"/></td>
 		</tr>
 	</table>
 	</form>
-	
 </body>
 </html>

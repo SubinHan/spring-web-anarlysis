@@ -8,7 +8,7 @@
 
 </head>
 <body>
-    <h3>서블릿3부터 지원하는 Part 인터페이스를 이용한 파일업로드</h3>
+    <h3>파일업로드</h3>
     <form method="post" action="UploadServlet" enctype="multipart/form-data">
         파일선택: <input type="file" name="multiPartServlet" multiple="multiple"/>
         <input type="submit" value="Upload"/>

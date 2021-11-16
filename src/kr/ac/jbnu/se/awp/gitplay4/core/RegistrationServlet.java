@@ -1,6 +1,7 @@
 package kr.ac.jbnu.se.awp.gitplay4.core;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,6 +26,14 @@ public class RegistrationServlet extends HttpServlet {
 		UserManager manager = UserManager.getInstance();
 		
 		manager.registerUser(id, password);
+		
+	
+		PrintWriter writer = resp.getWriter();
+		writer.println("<script>alert('Registering User Success!'); location.href=\"login.jsp\"; </script>");
+		writer.close();
+			
+//			this.getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
+		
 	}
 
 }
