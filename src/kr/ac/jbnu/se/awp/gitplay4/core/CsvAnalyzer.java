@@ -15,51 +15,42 @@ public class CsvAnalyzer {
 	private Attribute col[];
 	private int numCol;
 	private int numRow;
-	
-	public CsvAnalyzer(String path, Boolean header){	
+
+	public CsvAnalyzer(String path, Boolean header) {
 		String line = "";
-	 
+
 		try {
-			
-			// change 1
-//			InputStream inputStream = new BufferedInputStream(new FileInputStream(path));
-//		    Reader reader =
-//		            new InputStreamReader(inputStream, Charset.forName("UTF-8"));
-//		    
-		    // origin
-			//BufferedReader br = new BufferedReader(new FileReader(path));
-			
-			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path),"UTF-8"));
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"));
 			// ���� ���� ���ؼ� ����
 			line = br.readLine();
 			String[] values = line.split(",");
 			numCol = values.length;
-			
+
 			// �迭 �Ҵ�
 			col = new Attribute[numCol];
-			for(int i=0; i<numCol; i++) {
+			for (int i = 0; i < numCol; i++) {
 				col[i] = new Attribute();
 			}
-			
+
 			// ��� ����
-			if(header==true) {
+			if (header == true) {
 				values = line.split(",");
-				for(int i=0; i<numCol; i++) {
+				for (int i = 0; i < numCol; i++) {
 					col[i].setName(values[i]);
 					System.out.println(values[i]); // 확인
 				}
-			}
-			else {
-				for(int i=0; i<numCol; i++) {
-					col[i].setName("column" + (i+1));
+			} else {
+				for (int i = 0; i < numCol; i++) {
+					col[i].setName("column" + (i + 1));
 					col[i].addData(values[i]);
 				}
 			}
-			
+
 			// ������ ����
-			while((line=br.readLine()) != null) {
-				values = line.split(",");				
-				for(int i=0; i<numCol; i++) {
+			while ((line = br.readLine()) != null) {
+				values = line.split(",");
+				for (int i = 0; i < numCol; i++) {
 					col[i].addData(values[i]);
 				}
 			}
@@ -68,90 +59,98 @@ public class CsvAnalyzer {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		// ������ ���� Ȯ��
-//		col[1].setNum();
-//		rownum = col[1].getNum();
-//		for(int i=0; i<rownum; i++) {
-//			for(int j=0; j<colnum; j++) {
-//				System.out.println(col[j].getData(i));
-//			}
-//		}
 	}
-	
-	// NA ����
-//	public void setNa() {
-//		for(int )
-//	}
-	
+
 	public int getNumOfColumn() {
 		return numCol;
 	}
-	
+
 	public int getNumOfRow() {
 		return numRow;
 	}
-	
+
 	public String getColumnName(int index) {
 		return col[index].getName();
 	}
-	
+
 	public String[] getColumnNames() {
 		String[] columnNames = new String[numCol];
-		for(int i = 0; i < numCol; i++) {
-			String beforeEncoding = col[i].getName();	
+		for (int i = 0; i < numCol; i++) {
+			String beforeEncoding = col[i].getName();
 //			ByteBuffer buffer = StandardCharsets.UTF_8.encode(beforeEncoding);
 //			columnNames[i] = StandardCharsets.UTF_8.decode(buffer).toString();
-			
+
 //			byte[] bytes = beforeEncoding.getBytes();
 //			columnNames[i] = new String(bytes, StandardCharsets.UTF_8);
 //			assertNotEquals(columnNames[i],beforeEncoding);
 			System.out.println(columnNames[i]);
-			columnNames[i] = col[i].getName();	
-			
+			columnNames[i] = col[i].getName();
+
 		}
-	
+
 		return columnNames;
+	}
+	
+	public boolean isNumericColumn(int column) {
+		for (int i = 0; i < this.col[column].getSize(); i++) {
+			String data = this.col[column].getData(i);
+			if (data == null)
+				continue;
+			if (!isNumeric(data)) {
+				System.out.println(data);
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public double getMinOf(int column) {
+		double min = Double.MAX_VALUE;
+
+		for (int i = 0; i < this.col[column].getSize(); i++) {
+			String data = this.col[column].getData(i);
+			if (data == null)
+				continue;
+			if (isNumeric(data)) {
+				double num = Double.parseDouble(data);
+				if (min > num)
+					min = num;
+			} else
+				return Double.NaN;
+		}
+
+		return min;
+	}
+
+	public double getMaxOf(int column) {
+		double max = Double.MIN_VALUE;
+
+		for (int i = 0; i < this.col[column].getSize(); i++) {
+			String data = this.col[column].getData(i);
+			if (data == null)
+				continue;
+			if (isNumeric(data)) {
+				double num = Double.parseDouble(data);
+				if (max < num)
+					max = num;
+			} else
+				return Double.NaN;
+		}
+
+		return max;
+	}
+
+	private static boolean isNumeric(String str) {
+		try {
+			Double.parseDouble(str);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
 	}
 
 	private void assertNotEquals(String beforeEncoding, String string) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
-//	public void getCol(int[] idx, int rownum) {
-//		for(int i=0; i<idx.length; i++) {
-//			System.out.print(col[idx[i]].getName()+" ");
-//		}
-//		System.out.println();
-//		
-//		for(int j=0; j<rownum; j++) {
-//			for(int i=0; i<idx.length; i++) {
-//				System.out.print(col[idx[i]].getData(j)+ " ");
-//			}
-//			System.out.println();
-//		}
-//	}
-//	
-//	public void getRow(int[] idx) {
-//		for (int j=0; j<idx.length; j++) {
-//			for(int i=0; i<numCol; i++) {
-//				System.out.print(col[i].getData(idx[j])+" ");
-//			}
-//			System.out.println();
-//		}
-//	}
-	
-//	public void head() {
-//		for(int i=0; i<numCol; i++) {
-//			System.out.print(col[i].getName()+" ");
-//		}
-//		System.out.println();
-//		for(int j=0; j<6 ; j++) {
-//			for(int i=0; i<numCol; i++) {
-//				System.out.print(col[i].getData(j)+ " ");
-//			}
-//			System.out.println();
-//		}
-//	}
 }

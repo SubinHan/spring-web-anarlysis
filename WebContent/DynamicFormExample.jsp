@@ -15,7 +15,7 @@
 		userIP = request.getRemoteAddr();  
 	}
 	
-	File csvFile = CsvManager.getRecentCsv(userIP);
+	File csvFile = FileManager.getRecentCsv(userIP);
 	CsvAnalyzer analyzer = new CsvAnalyzer(csvFile.getPath(), true);
 	
 	String[] givenColName = { "Column 1", "Column 2", "Column 3", "Column 4", "Column 5", "Column 6", "Column 7" };

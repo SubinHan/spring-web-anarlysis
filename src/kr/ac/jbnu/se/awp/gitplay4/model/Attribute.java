@@ -7,7 +7,6 @@ public class Attribute {
 	private ArrayList<String> data;
 	private String name;
 	private HashSet<Integer> na_array;
-	private int num;
 	
 	public Attribute() {
 		data = new ArrayList<String>();
@@ -34,14 +33,14 @@ public class Attribute {
 		return name;
 	}
 	
-	public int getNum() {
-		return num;
+	public int getSize() {
+		return this.data.size();
 	}
 
 //	public Integer getNa_array(String ) {
-//		¾î¶² ½ÄÀ¸·Î ¹ÝÈ¯ÇÒÁö .. 
-// 		°Ë»öÇÏ´Â °æ¿ìµµ »ý°¢
-// 		µ¥ÀÌÅÍ ¹ÝÈ¯ÇÒ ¶§ ¾î¶»°Ô ÇØ¾ßÇÒÁö..
+//		ï¿½î¶² ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ï¿½ï¿½ .. 
+// 		ï¿½Ë»ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ìµµ ï¿½ï¿½ï¿½ï¿½
+// 		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ ï¿½ï¿½ ï¿½î¶»ï¿½ï¿½ ï¿½Ø¾ï¿½ï¿½ï¿½ï¿½ï¿½..
 //	} 
 	
 }
