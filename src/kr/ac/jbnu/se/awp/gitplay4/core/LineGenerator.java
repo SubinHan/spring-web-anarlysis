@@ -15,7 +15,7 @@ public class LineGenerator extends ChartGenerator{
 		super(path, xAxis, yAxis, saveDirectoryPath);
 	}
 
-	public void makeLine() {
+	public void generate() {
 
 		try {
 			connection = new RConnection();
