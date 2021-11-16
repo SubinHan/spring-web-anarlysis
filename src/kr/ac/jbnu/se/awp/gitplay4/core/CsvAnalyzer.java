@@ -3,10 +3,14 @@ package kr.ac.jbnu.se.awp.gitplay4.core;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
+import java.util.List;
+
+import org.apache.catalina.tribes.util.Arrays;
+
+import com.opencsv.CSVReader;
 
 import kr.ac.jbnu.se.awp.gitplay4.model.Attribute;
 
@@ -19,6 +23,9 @@ public class CsvAnalyzer {
 	public CsvAnalyzer(String path, Boolean header) {
 		String line = "";
 
+		
+		
+		
 		try {
 
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"));

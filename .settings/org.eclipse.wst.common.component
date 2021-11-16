@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-        
-    <wb-module deploy-name="kr.ac.jbnu.se.awp.gitplay4">
-                
-        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
-                
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-                
-        <property name="context-root" value="kr.ac.jbnu.se.awp.gitplay4"/>
-                
-        <property name="java-output-path" value="/kr.ac.jbnu.se.awp.gitplay4/bin"/>
             
-    </wb-module>
     
+    <wb-module deploy-name="kr.ac.jbnu.se.awp.anarlyzer-0.0.1-SNAPSHOT">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+                        
+        
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+                        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+                        
+        
+        <property name="java-output-path" value="/kr.ac.jbnu.se.awp.gitplay4/bin"/>
+        <property name="context-root" value="kr.ac.jbnu.se.awp.anarlyzer"/>
+                    
+    
+    </wb-module>
+        
+
 </project-modules>
