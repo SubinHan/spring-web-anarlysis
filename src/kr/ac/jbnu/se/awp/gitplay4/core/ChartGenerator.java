@@ -26,7 +26,7 @@ public class ChartGenerator {
 	protected  String userfilename = "3530916043.csv";
 	protected  String saveDirectoryPath;
 	protected  String rfilePath= "\"" + downloadPath +"\"";
-	protected  String imageTitle = "Temperature";
+	protected  String imageTitle = "Untitled";
 	protected  String imageName = imageTitle.concat(".png");
 	protected  String x = "수집시간";
 	protected  String y = "온도";
@@ -50,8 +50,11 @@ public class ChartGenerator {
 	
 
 	
+	
 	//it also will be changed because of difference of the number of x,y parameters
 	//maybe this method will have parameter like outlierName and Range
+	
+	
 	public void preprocess() {
 		
 		try {

@@ -26,13 +26,6 @@ public class LineGenerator extends ChartGenerator{
 			connection.eval("library(ggplot2)");
 			connection.eval("library(dplyr)");
 			
-			System.out.println("a<-csv_data%>% ggplot(aes("+x+", "+y+", group=1))"
-					+ "+ geom_line(color = 'coral')"
-					+ "+ ggtitle(\""+imageTitle+"\")"
-					+ "+ xlab(\""+xName+"\")+ylab(\""+yName+"\")"
-					+ "+ theme_light()"
-					+ "+ theme(plot.title = element_text(size=20, hjust=0.5))");
-			
 			connection.eval("a<-csv_data%>% ggplot(aes("+x+", "+y+", group=1))"
 					+ "+ geom_line(color = 'coral')"
 					+ "+ ggtitle(\""+imageTitle+"\")"
