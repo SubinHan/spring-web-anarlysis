@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.ac.jbnu.se.awp.gitplay4.core.r.ChartGeneratorBuilder;
 import kr.ac.jbnu.se.awp.gitplay4.core.r.LineChartGeneratorBuilder;
@@ -16,10 +17,11 @@ public class CsvAnalyzerServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		HttpSession session = req.getSession();
+		String id = (String) session.getAttribute("id");
 		
 		String path, xAxis, yAxis, saveDirectoryPath;
-		path = FileManager.getRecentCsv(FileManager.getUserIP(req)).getPath();
+		path = FileManager.getRecentCsv(id).getPath();
 		xAxis = req.getParameter("xAxis");
 		yAxis = req.getParameter("yAxis");
 		saveDirectoryPath = FileManager.getChartFolderPath(FileManager.getUserIP(req));
