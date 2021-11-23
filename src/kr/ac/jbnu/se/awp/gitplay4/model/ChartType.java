@@ -4,5 +4,6 @@ public enum ChartType {
 	LINE,
 	BAR,
 	HISTOGRAM,
-	PIE
+	PIE,
+	BOX
 }

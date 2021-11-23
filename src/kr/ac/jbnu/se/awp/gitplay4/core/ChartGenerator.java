@@ -30,14 +30,18 @@ public class ChartGenerator {
 	protected String outlierRange_start = "30";
 	protected String outlierRange_end = "50";
 	protected final ChartType chartType;
+	protected double ymax, ymin;
 
-	public ChartGenerator(String csvPath, String xAxis, String yAxis, String saveDirectoryPath, ChartType chartType) {
+	public ChartGenerator(String csvPath, String chartName,double ymax, double ymin, String xAxis, String yAxis, String saveDirectoryPath, ChartType chartType) {
 		this.downloadPath = csvPath.replace("\\", "/");
 		this.rfilePath = "\"" + downloadPath + "\"";
+		this.imageTitle = chartName;
 		this.x = xAxis;
 		this.y = yAxis;
 		this.xName = xAxis;
 		this.yName = yAxis;
+		this.ymax = ymax;
+		this.ymin = ymin;
 		this.saveDirectoryPath = saveDirectoryPath.replace("\\", "/");
 		this.saveDirectoryPath = "\"" + saveDirectoryPath + "\"";
 		this.chartType = chartType;
@@ -66,7 +70,7 @@ public class ChartGenerator {
 			connection.eval("setwd(" + saveDirectoryPath + ")");
 			connection.eval("ggsave(filename=\"" + imageName + "\", plot=a, width=12,height=6)");
 
-			System.out.println(imageName + " Line Making Clear");
+			System.out.println(imageName + ", "+ chartType+ " Making Clear");
 
 		} catch (RserveException e) {
 			e.printStackTrace();
@@ -78,7 +82,7 @@ public class ChartGenerator {
 	// it also will be changed because of difference of the number of x,y parameters
 	// maybe this method will have parameter like outlierName and Range
 
-	private String getEvalChartType() {
+	private String getEvalParam() {
 		String toReturn = "";
 		
 		switch (this.chartType) {
@@ -88,13 +92,19 @@ public class ChartGenerator {
 		case BAR:
 			toReturn = "a<-csv_data%>% ggplot(aes(" + y + ", group=1))";
 			break;
+		case HISTOGRAM:
+			toReturn = "a<-csv_data%>% ggplot(aes(" + y + ", group=1))";
+			break;
+		case BOX:
+			toReturn = "a<-csv_data%>% ggplot(aes(" + x + ", " + y + ", group=1))";
+			break;
 		default:
 			break;
 		}
 		return toReturn;
 	}
 
-	private String getEvalParam() {
+	private String getEvalChartType() {
 		String toReturn = "";
 		
 		switch (this.chartType) {
@@ -103,6 +113,12 @@ public class ChartGenerator {
 			break;
 		case BAR:
 			toReturn = "+ geom_bar(color = 'coral')";
+			break;
+		case HISTOGRAM:
+			toReturn = "+ geom_histogram(color = 'red')";
+			break;
+		case BOX:
+			toReturn = "+ geom_boxplot(color = 'coral')";
 			break;
 		default:
 			break;

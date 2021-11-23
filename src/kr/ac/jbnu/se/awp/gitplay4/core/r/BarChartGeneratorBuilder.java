@@ -15,7 +15,7 @@ public class BarChartGeneratorBuilder extends ChartGeneratorBuilder {
 	
 	@Override
 	protected ChartGenerator createChratGenerator() {
-		ChartGenerator toReturn = new ChartGenerator(csvPath, null, yName, outputPath, ChartType.BAR);
+		ChartGenerator toReturn = new ChartGenerator(csvPath, chartName, null, yName, outputPath, ChartType.BAR);
 		
 		return toReturn;
 	}

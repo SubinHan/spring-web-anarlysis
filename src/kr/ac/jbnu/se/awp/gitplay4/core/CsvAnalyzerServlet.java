@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kr.ac.jbnu.se.awp.gitplay4.core.r.BarChartGeneratorBuilder;
+import kr.ac.jbnu.se.awp.gitplay4.core.r.BoxChartGeneratorBuilder;
 import kr.ac.jbnu.se.awp.gitplay4.core.r.ChartGeneratorBuilder;
+import kr.ac.jbnu.se.awp.gitplay4.core.r.HistogramChartGeneratorBuilder;
 import kr.ac.jbnu.se.awp.gitplay4.core.r.LineChartGeneratorBuilder;
 
 @WebServlet(name = "DynamicFormExServlet", urlPatterns = { "/DynamicFormExServlet" })
@@ -21,14 +23,18 @@ public class CsvAnalyzerServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		String id = (String) session.getAttribute("id");
 		
-		String path, xAxis, yAxis, saveDirectoryPath;
+		String path, chartName, xAxis, yAxis, saveDirectoryPath;
+		double ymax, ymin;
 		path = FileManager.getRecentCsv(id).getPath();
+		chartName = req.getParameter("chartName");
 		xAxis = req.getParameter("xAxis");
 		yAxis = req.getParameter("yAxis");
 		saveDirectoryPath = FileManager.getChartFolderPath(id);
+		ymax= Double.parseDouble(req.getParameter("ymax"));
+		ymin = Double.parseDouble( req.getParameter("ymin"));
 		
-		ChartGeneratorBuilder builder = new BarChartGeneratorBuilder();
-		ChartGenerator generator = builder.csvPath(path).outputPath(saveDirectoryPath).xName(xAxis).yName(yAxis).build();
+		ChartGeneratorBuilder builder = new BoxChartGeneratorBuilder();
+		ChartGenerator generator = builder.csvPath(path).chartName(chartName).yRangeMax(ymax).yRangeMin(ymin).outputPath(saveDirectoryPath).xName(xAxis).yName(yAxis).build();
 		
 		generator.generate();
 		
