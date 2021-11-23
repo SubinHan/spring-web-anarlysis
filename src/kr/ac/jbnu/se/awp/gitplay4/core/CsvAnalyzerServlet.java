@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import kr.ac.jbnu.se.awp.gitplay4.core.r.BarChartGeneratorBuilder;
 import kr.ac.jbnu.se.awp.gitplay4.core.r.ChartGeneratorBuilder;
 import kr.ac.jbnu.se.awp.gitplay4.core.r.LineChartGeneratorBuilder;
 
@@ -26,7 +27,7 @@ public class CsvAnalyzerServlet extends HttpServlet {
 		yAxis = req.getParameter("yAxis");
 		saveDirectoryPath = FileManager.getChartFolderPath(id);
 		
-		ChartGeneratorBuilder builder = new LineChartGeneratorBuilder();
+		ChartGeneratorBuilder builder = new BarChartGeneratorBuilder();
 		ChartGenerator generator = builder.csvPath(path).outputPath(saveDirectoryPath).xName(xAxis).yName(yAxis).build();
 		
 		generator.generate();
