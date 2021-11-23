@@ -12,12 +12,9 @@ request.setCharacterEncoding("UTF-8");
 <link rel="stylesheet" href="register.css">
 </head>
 <%
-String userIP = request.getHeader("X-FORWARDED-FOR");
-if (userIP == null) {
-	userIP = request.getRemoteAddr();
-}
 
-File csvFile = FileManager.getRecentCsv(userIP);
+
+File csvFile = FileManager.getRecentCsv((String)session.getAttribute("id"));
 CsvAnalyzer analyzer = new CsvAnalyzer(csvFile.getPath(), true);
 
 String[] givenColName;

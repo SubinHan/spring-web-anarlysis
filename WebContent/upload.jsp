@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Upload</title>
-
+<link rel="stylesheet" href="upload.css">
 </head>
 <body>
     <h3>파일업로드</h3>
