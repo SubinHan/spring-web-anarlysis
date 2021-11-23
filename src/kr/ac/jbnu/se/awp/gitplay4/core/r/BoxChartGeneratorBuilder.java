@@ -3,19 +3,19 @@ package kr.ac.jbnu.se.awp.gitplay4.core.r;
 import kr.ac.jbnu.se.awp.gitplay4.core.ChartGenerator;
 import kr.ac.jbnu.se.awp.gitplay4.model.ChartType;
 
-public class LineChartGeneratorBuilder extends ChartGeneratorBuilder {
+public class BoxChartGeneratorBuilder extends ChartGeneratorBuilder {
 
-	public LineChartGeneratorBuilder() {
+	public BoxChartGeneratorBuilder() {
 		this(null, null);
 	}
 	
-	public LineChartGeneratorBuilder(String csvPath, String outputPath) {
+	public BoxChartGeneratorBuilder(String csvPath, String outputPath) {
 		super(csvPath, outputPath);
 	}
 
 	@Override
 	protected ChartGenerator createChratGenerator() {
-		ChartGenerator toReturn = new ChartGenerator(csvPath, chartName, xName, yName, outputPath, ChartType.LINE);
+		ChartGenerator toReturn = new ChartGenerator(csvPath, chartName, xName, yName, outputPath, ChartType.BOX);
 		
 		return toReturn;
 	}
