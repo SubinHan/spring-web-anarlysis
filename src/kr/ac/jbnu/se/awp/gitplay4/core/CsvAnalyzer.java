@@ -6,11 +6,14 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Reader;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.catalina.tribes.util.Arrays;
 
 import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvException;
 
 import kr.ac.jbnu.se.awp.gitplay4.model.Attribute;
 
@@ -20,51 +23,45 @@ public class CsvAnalyzer {
 	private int numCol;
 	private int numRow;
 
-	public CsvAnalyzer(String path, Boolean header) {
+	public CsvAnalyzer(String path, Boolean hasHeader) throws IOException, CsvException {
 		String line = "";
 
+		Reader reader = new FileReader(path);
+		CSVReader csvReader = new CSVReader(reader);
+		List<String[]> list = new ArrayList<>();
+		list = csvReader.readAll();
+		reader.close();
+		csvReader.close();
 		
+		if(list.get(0) != null) {
+			numCol = list.get(0).length;
+		}
+	
+		col = new Attribute[numCol];
+		for(int i = 0; i < numCol; i++) {
+			col[i] = new Attribute();
+		}
 		
-		
-		try {
-
-			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"));
-			// ���� ���� ���ؼ� ����
-			line = br.readLine();
-			String[] values = line.split(",");
-			numCol = values.length;
-
-			// �迭 �Ҵ�
-			col = new Attribute[numCol];
+		if (hasHeader == true) {
+			String[] headers = list.get(0);
 			for (int i = 0; i < numCol; i++) {
-				col[i] = new Attribute();
+				col[i].setName(headers[i]);
 			}
-
-			// ��� ����
-			if (header == true) {
-				values = line.split(",");
-				for (int i = 0; i < numCol; i++) {
-					col[i].setName(values[i]);
-					System.out.println(values[i]); // 확인
-				}
-			} else {
-				for (int i = 0; i < numCol; i++) {
-					col[i].setName("column" + (i + 1));
-					col[i].addData(values[i]);
-				}
+		}
+		else {
+			String[] firstRow = list.get(0);
+			for (int i = 0; i < numCol; i++) {
+				col[i].setName("column" + (i + 1));
+				col[i].addData(firstRow[i]);
 			}
-
-			// ������ ����
-			while ((line = br.readLine()) != null) {
-				values = line.split(",");
-				for (int i = 0; i < numCol; i++) {
-					col[i].addData(values[i]);
-				}
+		}
+		
+		list.remove(0);
+		
+		for(String[] row : list) {
+			for (int i = 0; i < numCol; i++) {
+				col[i].addData(row[i]);
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 
@@ -156,6 +153,15 @@ public class CsvAnalyzer {
 		}
 	}
 
+	// for test
+	public void print() {
+		for(Attribute attr : col) {
+			for(int i = 0; i < attr.getSize(); i++) {
+				System.out.println(attr.getData(i));
+			}
+		}
+	}
+	
 	private void assertNotEquals(String beforeEncoding, String string) {
 		// TODO Auto-generated method stub
 

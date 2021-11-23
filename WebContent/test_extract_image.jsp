@@ -8,7 +8,7 @@
 <%@ page import="java.sql.*"%>
 
 <%
-	String fullpath = FileManager.getRecentChartFile(FileManager.getUserIP(request)).getPath();
+	String fullpath = FileManager.getRecentChartFile((String)session.getAttribute("id")).getPath();
 %>
 
 <title>Insert title here</title>
