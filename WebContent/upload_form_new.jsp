@@ -8,9 +8,10 @@
 <link rel="stylesheet" href="upload.css">
 </head>
 <body>
-    <h3>파일업로드</h3>
+    <h3>차트 생성을 시작할까요?</h3>
+    <h4>파일을 업로드하세요.</h4>
     <form method="post" action="UploadServlet" enctype="multipart/form-data">
-        파일선택: <input type="file" name="multiPartServlet" multiple="multiple"/>
+        <input type="file" name="multiPartServlet" multiple="multiple"/>
         <input type="submit" value="Upload"/>
     </form>
 </body>
