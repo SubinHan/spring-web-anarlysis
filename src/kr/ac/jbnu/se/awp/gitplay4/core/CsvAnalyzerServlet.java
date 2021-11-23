@@ -24,7 +24,7 @@ public class CsvAnalyzerServlet extends HttpServlet {
 		path = FileManager.getRecentCsv(id).getPath();
 		xAxis = req.getParameter("xAxis");
 		yAxis = req.getParameter("yAxis");
-		saveDirectoryPath = FileManager.getChartFolderPath(FileManager.getUserIP(req));
+		saveDirectoryPath = FileManager.getChartFolderPath(id);
 		
 		ChartGeneratorBuilder builder = new LineChartGeneratorBuilder();
 		ChartGenerator generator = builder.csvPath(path).outputPath(saveDirectoryPath).xName(xAxis).yName(yAxis).build();
