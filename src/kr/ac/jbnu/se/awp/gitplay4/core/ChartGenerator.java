@@ -32,6 +32,10 @@ public class ChartGenerator {
 	protected final ChartType chartType;
 	protected double ymax, ymin;
 
+	public ChartGenerator(String csvPath, String chartName, String xAxis, String yAxis, String saveDirectoryPath, ChartType chartType) {
+		this(csvPath, chartName, Double.MIN_VALUE, Double.MAX_VALUE, xAxis, yAxis, saveDirectoryPath, chartType);
+	}
+	
 	public ChartGenerator(String csvPath, String chartName,double ymax, double ymin, String xAxis, String yAxis, String saveDirectoryPath, ChartType chartType) {
 		this.downloadPath = csvPath.replace("\\", "/");
 		this.rfilePath = "\"" + downloadPath + "\"";
