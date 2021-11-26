@@ -12,8 +12,10 @@ import javax.servlet.http.HttpSession;
 import kr.ac.jbnu.se.awp.gitplay4.core.r.BarChartGeneratorBuilder;
 import kr.ac.jbnu.se.awp.gitplay4.core.r.BoxChartGeneratorBuilder;
 import kr.ac.jbnu.se.awp.gitplay4.core.r.ChartGeneratorBuilder;
+import kr.ac.jbnu.se.awp.gitplay4.core.r.ChartGeneratorBuilderFactory;
 import kr.ac.jbnu.se.awp.gitplay4.core.r.HistogramChartGeneratorBuilder;
 import kr.ac.jbnu.se.awp.gitplay4.core.r.LineChartGeneratorBuilder;
+import kr.ac.jbnu.se.awp.gitplay4.model.ChartType;
 
 @WebServlet(name = "DynamicFormExServlet", urlPatterns = { "/DynamicFormExServlet" })
 public class CsvAnalyzerServlet extends HttpServlet {
@@ -33,7 +35,7 @@ public class CsvAnalyzerServlet extends HttpServlet {
 		ymax= Double.parseDouble(req.getParameter("ymax"));
 		ymin = Double.parseDouble( req.getParameter("ymin"));
 		
-		ChartGeneratorBuilder builder = new BoxChartGeneratorBuilder();
+		ChartGeneratorBuilder builder = ChartGeneratorBuilderFactory.createBuilder(ChartType.BAR);
 		ChartGenerator generator = builder.csvPath(path).chartName(chartName).yRangeMax(ymax).yRangeMin(ymin).outputPath(saveDirectoryPath).xName(xAxis).yName(yAxis).build();
 		
 		generator.generate();
