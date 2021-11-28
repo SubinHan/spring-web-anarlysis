@@ -9,7 +9,7 @@ request.setCharacterEncoding("UTF-8");
 <head>
 <meta charset="UTF-8">
 <title>dynamic form</title>
-<link rel="stylesheet" href="register.css">
+<link rel="stylesheet" href="css/register.css">
 </head>
 <%
 

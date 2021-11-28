@@ -7,7 +7,7 @@
 <title>login</title>
 </head>
 <body>
-	<form action="LoginServlet" method="post">
+	<form action="./upload" modelAttribute="login" method="post">
 	
 	<table width="400" align="center" border="1" cellspacing="0" cellpadding="5"]>
 	
