@@ -30,13 +30,13 @@ public class ChartGenerator {
 	protected String outlierRange_start = "30";
 	protected String outlierRange_end = "50";
 	protected final ChartType chartType;
-	protected double ymax, ymin;
+	protected String ymax=String.valueOf(Double.MAX_VALUE), ymin=String.valueOf(Double.MIN_VALUE);
 
-	public ChartGenerator(String csvPath, String chartName, String xAxis, String yAxis, String saveDirectoryPath, ChartType chartType) {
-		this(csvPath, chartName, Double.MIN_VALUE, Double.MAX_VALUE, xAxis, yAxis, saveDirectoryPath, chartType);
-	}
+//	public ChartGenerator(String csvPath, String chartName, String xAxis, String yAxis, String saveDirectoryPath, ChartType chartType) {
+//		this(csvPath, chartName, Double.MIN_VALUE, Double.MAX_VALUE, xAxis, yAxis, saveDirectoryPath, chartType);
+//	}
 	
-	public ChartGenerator(String csvPath, String chartName,double ymax, double ymin, String xAxis, String yAxis, String saveDirectoryPath, ChartType chartType) {
+	public ChartGenerator(String csvPath, String chartName, String ymax, String ymin, String xAxis, String yAxis, String saveDirectoryPath, ChartType chartType) {
 		this.downloadPath = csvPath.replace("\\", "/");
 		this.rfilePath = "\"" + downloadPath + "\"";
 		this.imageTitle = chartName;
@@ -59,7 +59,10 @@ public class ChartGenerator {
 
 			System.out.println("csv_data <- read.csv(" + rfilePath + ",header=TRUE)");
 			connection.eval("csv_data <- read.csv(" + rfilePath + ",header=TRUE)");
-
+			
+			System.out.println("csv_data <- subset(csv_data, "+yName+"<"+ymax+" & "+yName+">"+ymin+")");
+			connection.eval("csv_data <- subset(csv_data, "+yName+"<="+ymax+" & "+yName+">="+ymin+")");
+			
 			connection.eval("library(ggplot2)");
 			connection.eval("library(dplyr)");
 
