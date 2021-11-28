@@ -29,10 +29,10 @@ public class RegistrationServlet extends HttpServlet {
 		
 	
 		PrintWriter writer = resp.getWriter();
-		writer.println("<script>alert('Registering User Success!'); location.href=\"login.jsp\"; </script>");
+		writer.println("<script>alert('Registering User Success!'); location.href=\"./\"; </script>");
 		writer.close();
-			
-//			this.getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
+//			
+//		this.getServletContext().getRequestDispatcher("/").forward(req, resp);
 		
 	}
 

@@ -26,6 +26,11 @@ public class PageController {
 
 		return "login";
 	}
+	
+	@RequestMapping(value="registration", method =RequestMethod.GET) 
+	public String registration() {
+		 return "registration";
+	}
 
 	@RequestMapping(value = "upload", method = RequestMethod.POST)
 	public String upload(@ModelAttribute Login login) {

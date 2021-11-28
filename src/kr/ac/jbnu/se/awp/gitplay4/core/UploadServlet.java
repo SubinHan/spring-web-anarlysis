@@ -18,9 +18,12 @@ public class UploadServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		String id = (String) session.getAttribute("id");		
+		System.out.println(id);
 		FileManager.addFile(id, req);
 
 		this.getServletContext().getRequestDispatcher("/configuration").forward(req, resp);
 	} // doPost()
+	
+	
 
 } // class

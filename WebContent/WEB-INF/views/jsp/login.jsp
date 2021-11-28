@@ -21,7 +21,7 @@
 			<td width ="200" align="center"><input type="text" name="password"/></td>
 		</tr>
 		<tr>
-			<td colspan ="1" align="center"><input type="button" value="회원가입하기" onclick=" location='joinPage.jsp'"/></td>
+			<td colspan ="1" align="center"><input type="button" value="회원가입하기" onclick=" location='./registration'"/></td>
 			
 			<td colspan ="1" align="center"><input type="submit" value="로그인하기"/></td>
 		</tr>

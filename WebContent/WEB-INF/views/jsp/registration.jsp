@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div align="center">
-<H2>이벤트 등록</H2>
+<H2>회원가입</H2>
 <HR>
 
 <form name="form1" method="post" action="RegistrationServlet">
