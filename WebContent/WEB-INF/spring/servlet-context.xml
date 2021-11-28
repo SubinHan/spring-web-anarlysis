@@ -21,13 +21,17 @@
 
 
 	<resources location="WEB-INF/views/css/" mapping="/css/**"></resources>
-	<resources location="WEB-INF/views/images/" mapping="/images/**"></resources>
+	<resources location="WEB-INF/views/images/"
+		mapping="/images/**"></resources>
 	<beans:bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="WEB-INF/views/jsp/" />
+		<beans:property name="prefix"
+			value="WEB-INF/views/jsp/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
+
 	<context:component-scan
-		base-package="controller" />
+		base-package="controller">
+		</context:component-scan>
 </beans:beans>

@@ -14,7 +14,7 @@
 	<div id="container">
 		<div id="title">차트 생성을 시작할까요?</div>
 		<div id="subtitle">파일을 업로드하세요.</div>
-		<form method="post" action="./configuration"
+		<form method="post" action="UploadServlet"
 			enctype="multipart/form-data">
 			<div id="upload">
 				<div class="filebox">
@@ -27,8 +27,12 @@
 				<!-- 		파일선택: <input type="file" name="multiPartServlet" multiple="multiple"/>
     			<div id="submitbox">
         			<input type="submit" id="submit_button" value="Upload"/>
-        		</div>
         		</div>-->
+			</div>
+			<div>
+				<input type="submit" id="submit_button" value="Upload" />
+			</div>
+
 		</form>
 
 

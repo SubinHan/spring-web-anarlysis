@@ -40,7 +40,7 @@ public class CsvAnalyzerServlet extends HttpServlet {
 		
 		generator.generate();
 		
-		this.getServletContext().getRequestDispatcher("/test_extract_image.jsp").forward(req, resp);
+		this.getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/test_extract_image.jsp").forward(req, resp);
 	}
 
 }
