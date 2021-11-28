@@ -20,7 +20,7 @@ public class UploadServlet extends HttpServlet {
 		String id = (String) session.getAttribute("id");		
 		FileManager.addFile(id, req);
 
-		this.getServletContext().getRequestDispatcher("/dynamicform.jsp").forward(req, resp);
+		this.getServletContext().getRequestDispatcher("/configuration").forward(req, resp);
 	} // doPost()
 
 } // class
