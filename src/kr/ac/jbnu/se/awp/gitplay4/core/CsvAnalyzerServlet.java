@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import kr.ac.jbnu.se.awp.gitplay4.core.r.BarChartGeneratorBuilder;
 import kr.ac.jbnu.se.awp.gitplay4.core.r.BoxChartGeneratorBuilder;
+import kr.ac.jbnu.se.awp.gitplay4.core.r.ChartGenerator;
 import kr.ac.jbnu.se.awp.gitplay4.core.r.ChartGeneratorBuilder;
 import kr.ac.jbnu.se.awp.gitplay4.core.r.ChartGeneratorBuilderFactory;
 import kr.ac.jbnu.se.awp.gitplay4.core.r.HistogramChartGeneratorBuilder;

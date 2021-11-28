@@ -143,6 +143,17 @@ public class CsvAnalyzer {
 
 		return max;
 	}
+	
+	private int getNumberOf(String columnName) {
+		int result = 0;
+		for(Attribute column : col) {
+			if(column.getName().equals(columnName)) {
+				return result;
+			}
+			result++;
+		}
+		return -1;
+	}
 
 	private static boolean isNumeric(String str) {
 		try {

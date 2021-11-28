@@ -1,6 +1,5 @@
 package kr.ac.jbnu.se.awp.gitplay4.core.r;
 
-import kr.ac.jbnu.se.awp.gitplay4.core.ChartGenerator;
 import kr.ac.jbnu.se.awp.gitplay4.model.ChartType;
 
 public class LineChartGeneratorBuilder extends ChartGeneratorBuilder {

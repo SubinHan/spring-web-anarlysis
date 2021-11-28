@@ -1,4 +1,4 @@
-package kr.ac.jbnu.se.awp.gitplay4.core;
+package kr.ac.jbnu.se.awp.gitplay4.core.r;
 
 import org.rosuda.REngine.Rserve.RConnection;
 import org.rosuda.REngine.Rserve.RserveException;

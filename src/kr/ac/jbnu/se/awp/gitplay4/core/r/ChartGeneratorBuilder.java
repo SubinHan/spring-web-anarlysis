@@ -1,7 +1,5 @@
 package kr.ac.jbnu.se.awp.gitplay4.core.r;
 
-import kr.ac.jbnu.se.awp.gitplay4.core.ChartGenerator;
-
 public abstract class ChartGeneratorBuilder {
 	protected String csvPath;
 	protected String outputPath;

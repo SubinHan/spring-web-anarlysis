@@ -1,6 +1,5 @@
 package kr.ac.jbnu.se.awp.gitplay4.core.r;
 
-import kr.ac.jbnu.se.awp.gitplay4.core.ChartGenerator;
 import kr.ac.jbnu.se.awp.gitplay4.model.ChartType;
 
 public class HistogramChartGeneratorBuilder extends ChartGeneratorBuilder {
@@ -15,7 +14,7 @@ public class HistogramChartGeneratorBuilder extends ChartGeneratorBuilder {
 	
 	@Override
 	protected ChartGenerator createChratGenerator() {
-		ChartGenerator toReturn = new ChartGenerator(csvPath, chartName, null, yName, outputPath, ChartType.HISTOGRAM);
+		ChartGenerator toReturn = new ChartGenerator(csvPath, chartName,yRangeMax,yRangeMin,  null, yName, outputPath, ChartType.HISTOGRAM);
 		
 		return toReturn;
 	}

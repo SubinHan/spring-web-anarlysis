@@ -1,6 +1,5 @@
 package kr.ac.jbnu.se.awp.gitplay4.core.r;
 
-import kr.ac.jbnu.se.awp.gitplay4.core.ChartGenerator;
 import kr.ac.jbnu.se.awp.gitplay4.model.ChartType;
 
 public class BoxChartGeneratorBuilder extends ChartGeneratorBuilder {
@@ -15,7 +14,7 @@ public class BoxChartGeneratorBuilder extends ChartGeneratorBuilder {
 
 	@Override
 	protected ChartGenerator createChratGenerator() {
-		ChartGenerator toReturn = new ChartGenerator(csvPath, chartName, xName, yName, outputPath, ChartType.BOX);
+		ChartGenerator toReturn = new ChartGenerator(csvPath, chartName,yRangeMax,yRangeMin,  xName, yName, outputPath, ChartType.BOX);
 		
 		return toReturn;
 	}
