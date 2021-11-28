@@ -25,17 +25,22 @@ public class CsvAnalyzerServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		String id = (String) session.getAttribute("id");
 		
-		String path, chartName, xAxis, yAxis, saveDirectoryPath;
-		double ymax, ymin;
+		String path, chartName, xAxis, yAxis, saveDirectoryPath, 
+		ymax=String.valueOf(Double.MAX_VALUE), ymin=String.valueOf(Double.MIN_VALUE);
+	
 		path = FileManager.getRecentCsv(id).getPath();
 		chartName = req.getParameter("chartName");
 		xAxis = req.getParameter("xAxis");
 		yAxis = req.getParameter("yAxis");
 		saveDirectoryPath = FileManager.getChartFolderPath(id);
-		ymax= Double.parseDouble(req.getParameter("ymax"));
-		ymin = Double.parseDouble( req.getParameter("ymin"));
+	
+//		ymax= Double.parseDouble(req.getParameter("ymax"));
+//		ymin = Double.parseDouble( req.getParameter("ymin"));
+		ymax = req.getParameter("ymax");
+		ymin = req.getParameter("ymin");
 		
-		ChartGeneratorBuilder builder = ChartGeneratorBuilderFactory.createBuilder(ChartType.BAR);
+		
+		ChartGeneratorBuilder builder = ChartGeneratorBuilderFactory.createBuilder(ChartType.LINE);
 		ChartGenerator generator = builder.csvPath(path).chartName(chartName).yRangeMax(ymax).yRangeMin(ymin).outputPath(saveDirectoryPath).xName(xAxis).yName(yAxis).build();
 		
 		generator.generate();

@@ -11,8 +11,8 @@ public abstract class ChartGeneratorBuilder {
 	protected String yName;
 	protected double xRangeMin;
 	protected double xRangeMax;
-	protected double yRangeMin;
-	protected double yRangeMax;
+	protected String yRangeMin;
+	protected String yRangeMax;
 	protected double gridRange;
 	
 	public ChartGeneratorBuilder() {
@@ -70,12 +70,12 @@ public abstract class ChartGeneratorBuilder {
 		return this;
 	}
 	
-	public ChartGeneratorBuilder yRangeMin(double yRangeMin) {
+	public ChartGeneratorBuilder yRangeMin(String yRangeMin) {
 		this.yRangeMin = yRangeMin;
 		return this;
 	}
 	
-	public ChartGeneratorBuilder yRangeMax(double yRangeMax) {
+	public ChartGeneratorBuilder yRangeMax(String yRangeMax) {
 		this.yRangeMax = yRangeMax;
 		return this;
 	}

@@ -56,8 +56,8 @@ int givenColNum;
 			</fieldset>
 			<fieldset>
 				<legend>범위 설정</legend>
-				<input type="text" name="ymax"> ~ <input type="text"
-					name="ymin">
+				<input type="text" name="ymin" value="0"> ~ <input type="text"
+					name="ymax" value="1000">
 			</fieldset>		
 			<input type="submit" value="Confirm">
 		</form>

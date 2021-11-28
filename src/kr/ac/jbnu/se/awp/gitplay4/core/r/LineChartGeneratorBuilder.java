@@ -15,7 +15,7 @@ public class LineChartGeneratorBuilder extends ChartGeneratorBuilder {
 
 	@Override
 	protected ChartGenerator createChratGenerator() {
-		ChartGenerator toReturn = new ChartGenerator(csvPath, chartName, xName, yName, outputPath, ChartType.LINE);
+		ChartGenerator toReturn = new ChartGenerator(csvPath, chartName,yRangeMax,yRangeMin, xName, yName, outputPath, ChartType.LINE);
 		
 		return toReturn;
 	}
