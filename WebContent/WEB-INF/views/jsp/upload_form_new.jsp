@@ -19,7 +19,7 @@
 			<div id="upload">
 				<div class="filebox">
 					<input class="upload-name" value="첨부파일" placeholder="첨부파일">
-					<label for="file"> 파일찾기 <input type="file"
+					<label for="file"> 파일찾기 <input type="file" id="file"
 						name="multiPartServlet" multiple="multiple" />
 					</label>
 				</div>
