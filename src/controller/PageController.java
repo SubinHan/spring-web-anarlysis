@@ -57,6 +57,12 @@ public class PageController {
 	public String configuration() {
 		return "dynamicform";
 	}
+	
+	@RequestMapping(value = "select", method = RequestMethod.POST)
+	public String selectChart() {
+		
+		return "select_charttype";
+	}
 
 	public static HttpSession session() {
 		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
