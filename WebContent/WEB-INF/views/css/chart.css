@@ -1,0 +1,31 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap');
+
+*{	
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+
+}
+
+#container {
+	width:1200px;
+	margin:20px auto;
+}
+
+#blank {
+	height:50px;
+}
+
+#additinal {
+	font-size: 25px;
+	font-family: 'Nanum Gothic', sans-serif;
+	font-weight : 400;	
+	text-align: center;
+	width : 100%;
+	height:30px;
+}
+
+#chart {
+	width : 100%;	
+}

@@ -4,29 +4,38 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>login</title>
+<title>Login</title>
+<link rel="stylesheet" href="css/login.css">
 </head>
 <body>
-	<form action="./upload" modelAttribute="login" method="post">
+	<div id="image">
+		<img src="images/anarlysis.jpg" height=50px; width=auto;>
+	</div>
+	<div id = "container">
+		
+		<div id = "title">AnaRlysis 로그인</div>
+		
+		<div id = "subtitle">계정이 없으신가요?
+			<a href = "registration">새 계정 만들기 ></a>		
+		</div>
 	
-	<table width="400" align="center" border="1" cellspacing="0" cellpadding="5"]>
-	
-		<tr><td colspan ="2" align="center">로그인</td></tr>
-		<tr>
-			<td width ="200" align="center">아이디</td>
-			<td width ="200" align="center"><input type="text" name="id"/></td>
-		</tr>
-		<tr>
-			<td width ="200" align="center">비밀번호</td>
-			<td width ="200" align="center"><input type="text" name="password"/></td>
-		</tr>
-		<tr>
-			<td colspan ="1" align="center"><input type="button" value="회원가입하기" onclick=" location='./registration'"/></td>
+		<div id = "form">
+			<form action = "./upload" modelAttribute="login" method = "post">
 			
-			<td colspan ="1" align="center"><input type="submit" value="로그인하기"/></td>
-		</tr>
-	</table>
-	</form>
+			<div class="idForm"> 
+				<input type = "text" name="id" class="id" placeholder="아이디">
+			</div>
+			<div class = "passForm"> 
+				<input type = "text" name="password" class="pw" placeholder="패스워드" autocomplete="off">
+				</div>
 	
+			<div id="submitbox">
+				<input type="submit" id="submit_button" value="로그인" />
+			</div>
+			
+		</form>
+		</div>
+		
+	</div>
 </body>
 </html>

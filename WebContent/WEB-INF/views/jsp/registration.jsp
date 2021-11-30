@@ -1,22 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Registration</title>
+<link rel="stylesheet" href="css/login.css">
 </head>
 <body>
-	<div align="center">
-<H2>회원가입</H2>
-<HR>
+	<div id="image">
+		<img src="images/anarlysis.jpg" height=50px; width=auto;>
+	</div>
+	<div id="container">
 
-<form name="form1" method="post" action="RegistrationServlet">
-id : <input type="text" name="id">
-password : <input type="text" name="password" size=20>
-<input type="submit" value="등록">
-</form>
-<HR>
-</div>
+		<div id="title">AnaRlysis 가입</div>
+
+		<div id="subtitle">
+			이미 사용 중인 계정이 있으신가요? <a href="./">AnaRlysis 계정으로 로그인하기 ></a>
+		</div>
+
+		<div id="form">
+			<form action="RegistrationServlet" method="post">
+
+				<div class="idForm">
+					<input type="text" name="id" class="id" placeholder="아이디">
+				</div>
+				<div class="passForm">
+					<input type="text" name="password" class="pw" placeholder="패스워드" autocomplete="off">
+				</div>
+				<div class="passForm">
+					<input type="text" name="passwordConfirm" class="pw" placeholder="패스워드 확인" autocomplete="off">
+				</div>
+
+				<div id="submitbox">
+					<input type="submit" id="submit_button" value="가입하기" />
+				</div>
+
+			</form>
+		</div>
 </body>
 </html>

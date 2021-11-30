@@ -9,12 +9,10 @@ request.setCharacterEncoding("UTF-8");
 <head>
 <meta charset="UTF-8">
 <title>dynamic form</title>
-<link rel="stylesheet" href="css/register.css">
+<link rel="stylesheet" href="css/login.css">
 </head>
 <%
-
-
-File csvFile = FileManager.getRecentCsv((String)session.getAttribute("id"));
+File csvFile = FileManager.getRecentCsv((String) session.getAttribute("id"));
 CsvAnalyzer analyzer = new CsvAnalyzer(csvFile.getPath(), true);
 
 String[] givenColName;
@@ -22,15 +20,19 @@ givenColName = analyzer.getColumnNames();
 int givenColNum;
 %>
 <body>
-	<h1>설정</h1>
-	<div>
-		<form method="post" action="DynamicFormExServlet">
-			<fieldset>
-				<legend>차트 이름 설정</legend>
-				<input type="text" name="chartName">
-			</fieldset>
-			<fieldset>
-				<legend>축 설정</legend>
+	<div id="image">
+		<img src="images/anarlysis.jpg" height=50px; width=auto;>
+	</div>
+	<div id = "container">
+		<div id = "title">어떤 차트가 필요하세요?</div>
+		<div id = "subtitle">차트 생성을 위해 필요한 옵션을 입력해주세요.</div>
+		
+		<div id = "form">
+			<form method="post" action="DynamicFormExServlet">
+			<div id = "chartNameForm">
+				<input type = "text" name="chartName" class="id" placeholder="차트 이름">
+			</div>
+			<div id = "axisForm">
 				<ul>
 					<li><label for=xaxis>x축</label> <select name="xAxis">
 							<%
@@ -53,14 +55,16 @@ int givenColNum;
 							%>
 					</select></li>
 				</ul>
-			</fieldset>
-			<fieldset>
-				<legend>범위 설정</legend>
-				<input type="text" name="ymin"> ~ <input type="text"
-					name="ymax">
-			</fieldset>		
-			<input type="submit" value="Confirm">
+			</div>
+			<div id = "rangeForm">
+				<input type="text" name="ymin" class=id placeholder="최솟값" > ~ 
+				<input type="text"name="ymax" class=id placeholder="최댓값">
+			</div>
+			<div id="submitbox">
+				<input type="submit" id="submit_button" value="Confirm" />
+			</div>
 		</form>
+		</div>
 	</div>
 </body>
 </html>

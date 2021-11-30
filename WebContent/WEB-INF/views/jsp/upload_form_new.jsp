@@ -29,7 +29,7 @@
         			<input type="submit" id="submit_button" value="Upload"/>
         		</div>-->
 			</div>
-			<div>
+			<div id="submitbox">
 				<input type="submit" id="submit_button" value="Upload" />
 			</div>
 
