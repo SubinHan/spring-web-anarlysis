@@ -21,7 +21,7 @@ public class UploadServlet extends HttpServlet {
 		System.out.println(id);
 		FileManager.addFile(id, req);
 
-		this.getServletContext().getRequestDispatcher("/configuration").forward(req, resp);
+		this.getServletContext().getRequestDispatcher("/select").forward(req, resp);
 	} // doPost()
 	
 	

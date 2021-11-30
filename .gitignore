@@ -10,6 +10,7 @@ tmp/
 *~.nib
 local.properties
 .settings/
+.classpath
 
 ### Java ###
 # Compiled class file

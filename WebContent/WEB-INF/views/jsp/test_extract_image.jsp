@@ -15,5 +15,11 @@
 </head>
 <body>
 	<img src="<%=fullpath%>" width=512 height=384></img>
+	<a href src="<%=fullpath%>" download>Download!!</a>
+	
+	<form action="download/<%=session.getAttribute("id")%>" method="get">
+		<input type ="submit" ></input>
+	</form>
+
 </body>
 </html>

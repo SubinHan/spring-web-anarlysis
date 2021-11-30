@@ -40,8 +40,8 @@ public class CsvAnalyzerServlet extends HttpServlet {
 		ymax = req.getParameter("ymax");
 		ymin = req.getParameter("ymin");
 		
-		
-		ChartGeneratorBuilder builder = ChartGeneratorBuilderFactory.createBuilder(ChartType.LINE);
+		ChartType type = (ChartType) session.getAttribute("chartType");
+		ChartGeneratorBuilder builder = ChartGeneratorBuilderFactory.createBuilder(type);
 		ChartGenerator generator = builder.csvPath(path).chartName(chartName).yRangeMax(ymax).yRangeMin(ymin).outputPath(saveDirectoryPath).xName(xAxis).yName(yAxis).build();
 		
 		generator.generate();
