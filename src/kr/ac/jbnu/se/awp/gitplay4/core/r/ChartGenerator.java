@@ -60,8 +60,10 @@ public class ChartGenerator {
 			System.out.println("csv_data <- read.csv(" + rfilePath + ",header=TRUE)");
 			connection.eval("csv_data <- read.csv(" + rfilePath + ",header=TRUE)");
 			
-			System.out.println("csv_data <- subset(csv_data, "+yName+"<"+ymax+" & "+yName+">"+ymin+")");
-			connection.eval("csv_data <- subset(csv_data, "+yName+"<="+ymax+" & "+yName+">="+ymin+")");
+			if(ymax!=""&&ymin!="") {
+				System.out.println("csv_data <- subset(csv_data, "+yName+"<"+ymax+" & "+yName+">"+ymin+")");
+				connection.eval("csv_data <- subset(csv_data, "+yName+"<="+ymax+" & "+yName+">="+ymin+")");
+			}
 			
 			connection.eval("library(ggplot2)");
 			connection.eval("library(dplyr)");
