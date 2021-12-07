@@ -29,7 +29,7 @@ int givenColNum;
 		<div id="subtitle">차트 생성을 위해 필요한 옵션을 입력해주세요.</div>
 
 		<div id="form">
-			<form method="post" action="DynamicFormExServlet">
+			<form method="post" action="generate">
 
 				<div class="chartNameForm">
 					<input type="text" name="chartName" class="id" placeholder="차트 이름">

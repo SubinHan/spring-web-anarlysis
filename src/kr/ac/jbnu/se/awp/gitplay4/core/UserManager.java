@@ -106,5 +106,5 @@ public class UserManager {
 
 		return password.equals(validPassword);
 	}
-
+	
 }

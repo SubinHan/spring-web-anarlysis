@@ -45,8 +45,7 @@ public class CsvAnalyzerServlet extends HttpServlet {
 		ChartGenerator generator = builder.csvPath(path).chartName(chartName).yRangeMax(ymax).yRangeMin(ymin).outputPath(saveDirectoryPath).xName(xAxis).yName(yAxis).build();
 		
 		generator.generate();
-		
-		this.getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/test_extract_image.jsp").forward(req, resp);
+		this.getServletContext().getRequestDispatcher("/test_extract_image").forward(req, resp);
 	}
 
 }
