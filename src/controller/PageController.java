@@ -4,9 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.net.URL;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,15 +32,15 @@ import kr.ac.jbnu.se.awp.gitplay4.model.Login;
 public class PageController {
 	boolean flag = false;
 	String message = "";
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, HttpServletRequest request) {
-		if(!flag) {
-			   String id = request.getParameter("id");
-			   model.addAttribute("id",id);
-			   System.out.println("id:"+ id );
-			   return "login";
-			   }
+		if (!flag) {
+			String id = request.getParameter("id");
+			model.addAttribute("id", id);
+			System.out.println("id:" + id);
+			return "login";
+		}
 		return "login";
 	}
 
@@ -51,19 +49,27 @@ public class PageController {
 		return "registration";
 	}
 
-	@RequestMapping(value = "upload", method = RequestMethod.POST)
+	@RequestMapping(value = "upload")
 	public String upload(@ModelAttribute Login login, HttpServletResponse resp) throws IOException {
-		String id = login.getId();
-		String password = login.getPassword();
+		String id = "";
+		String password = "";
+		id = login.getId();
+		if(id == null) {
+			id = (String) session().getAttribute("id");
+		}
+		password = login.getPassword();
+		if(password == null) {
+			password = (String) session().getAttribute("password");
+		}
 		UserManager manager = UserManager.getInstance();
 		HttpSession session = session();
-		
+
 		if (manager.isValid(id, password)) {
-			
+
 			session.setAttribute("id", id);
 			session.setAttribute("password", password);
 			System.out.println(session.getAttribute("id") + " " + session.getAttribute("password"));
-			session.setAttribute("message","");
+			session.setAttribute("message", "");
 
 		} else {
 //			resp.setContentType("text/html; charset=utf-8");
@@ -72,7 +78,7 @@ public class PageController {
 //			writer.println("<script>alert(\"올바른 ID와 패스워드가 아닙니다\")</script>");
 //			writer.flush();
 			flag = true;
-			session.setAttribute("message","올바른 ID와 패스워드가 아닙니다");
+			session.setAttribute("message", "올바른 ID와 패스워드가 아닙니다");
 			return "redirect:/";
 		}
 
@@ -93,9 +99,10 @@ public class PageController {
 	}
 
 	@RequestMapping(value = "generate", method = RequestMethod.POST)
-	public String generate(@RequestParam(name = "chartName") String chartName,
-			@RequestParam(name = "xAxis") String xAxis, @RequestParam(name = "yAxis") String yAxis,
-			@RequestParam(name = "ymax") String ymax, @RequestParam(name = "ymin") String ymin) {
+	public String generate(@RequestParam(name = "chartName", required = false) String chartName,
+			@RequestParam(name = "xAxis", required = false) String xAxis, @RequestParam(name = "yAxis") String yAxis,
+			@RequestParam(name = "ymax", required = false) String ymax,
+			@RequestParam(name = "ymin", required = false) String ymin) {
 		System.out.println("aaaababa");
 		HttpSession session = session();
 		String id = (String) session.getAttribute("id");
@@ -116,13 +123,48 @@ public class PageController {
 	}
 
 	@RequestMapping(value = "configuration", method = RequestMethod.POST)
-	public String configuration() {
+	public String configuration(HttpServletRequest req) {
+
+		HttpSession session = req.getSession();
+		System.out.println(req.getParameter("chartType"));
+		String chartType = req.getParameter("chartType");
+
+		ChartType type = null;
+		switch (chartType) {
+		case "BAR":
+			type = ChartType.BAR;
+			break;
+		case "HISTOGRAM":
+			type = ChartType.HISTOGRAM;
+			break;
+		case "LINE":
+			type = ChartType.LINE;
+			break;
+		case "BOX":
+			type = ChartType.BOX;
+			break;
+		case "PIE":
+			type = ChartType.PIE;
+			break;
+
+		}
+		session.setAttribute("chartType", type);
 		return "dynamicform";
 	}
 
 	@RequestMapping(value = "select", method = RequestMethod.POST)
-	public String selectChart() {
+	public String selectChartDoPost(HttpServletRequest req) {
 
+		HttpSession session = req.getSession();
+		String id = (String) session.getAttribute("id");
+		System.out.println(id);
+		FileManager.addFile(id, req);
+
+		return "select_charttype";
+	}
+
+	@RequestMapping(value = "select", method = RequestMethod.GET)
+	public String selectChartDoGet(HttpServletRequest req) {
 		return "select_charttype";
 	}
 
