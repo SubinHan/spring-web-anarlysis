@@ -35,7 +35,7 @@ public class PageController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 
-		return "select_charttype";
+		return "login";
 	}
 
 	@RequestMapping(value = "registration", method = RequestMethod.GET)
@@ -102,7 +102,7 @@ public class PageController {
 
 		generator.generate();
 
-		return "test_extract_image";
+		return "extract_image";
 	}
 
 	@RequestMapping(value = "configuration", method = RequestMethod.POST)
