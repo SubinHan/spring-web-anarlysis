@@ -35,7 +35,7 @@ public class PageController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 
-		return "login";
+		return "extract_image";
 	}
 
 	@RequestMapping(value = "registration", method = RequestMethod.GET)
