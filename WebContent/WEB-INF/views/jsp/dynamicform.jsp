@@ -52,8 +52,8 @@ int givenColNum;
 						}
 						%>
 					</select>
-					<%}%>
 				</div>
+				<%}%>
 				<div class="selectbox">
 					<label for=yAxis>y축</label> <select name="yAxis">
 						<%
