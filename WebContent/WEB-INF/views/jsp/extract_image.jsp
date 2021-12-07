@@ -36,8 +36,8 @@
 		</div>
 
 		<div id="additional">
-			다른 차트도 필요하신가요? <br> <a href="select_charttype">차트 다시 선택하러 가기
-					></a> <br> <a href="upload">새로운 파일 업로드하러 가기 ></a>
+			다른 차트도 필요하신가요? <br> <a href="UploadServlet">차트 다시 선택하러 가기
+					></a> <br> <a href="./upload">새로운 파일 업로드하러 가기 ></a>
 		</div>
 
 	</div>
