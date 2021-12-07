@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="javax.servlet.http.HttpServletRequest, java.io.File, kr.ac.jbnu.se.awp.gitplay4.core.*"%>
+	import="javax.servlet.http.HttpServletRequest, java.io.File, kr.ac.jbnu.se.awp.gitplay4.core.*, kr.ac.jbnu.se.awp.gitplay4.model.ChartType"%>
 <%
 request.setCharacterEncoding("UTF-8");
 %>
@@ -20,6 +20,8 @@ CsvAnalyzer analyzer = new CsvAnalyzer(csvFile.getPath(), true);
 String[] givenColName;
 givenColName = analyzer.getColumnNames();
 int givenColNum;
+
+
 %>
 <body>
 	<div id="image">
@@ -36,6 +38,8 @@ int givenColNum;
 				<div class="chartNameForm">
 					<input type="text" name="chartName" class="id" placeholder="차트 이름">
 				</div>
+				<%ChartType type = (ChartType)session.getAttribute("chartType");%>
+				<%if(type.toString().equals("LINE")||type.toString().equals("BOX")){ %>
 
 				<div class="selectbox">
 					<label for="xAxis">x축</label> <select name="xAxis">
@@ -48,6 +52,7 @@ int givenColNum;
 						}
 						%>
 					</select>
+					<%}%>
 				</div>
 				<div class="selectbox">
 					<label for=yAxis>y축</label> <select name="yAxis">
