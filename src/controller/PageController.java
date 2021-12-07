@@ -35,7 +35,7 @@ public class PageController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 
-		return "login";
+		return "select_charttype";
 	}
 
 	@RequestMapping(value = "registration", method = RequestMethod.GET)
