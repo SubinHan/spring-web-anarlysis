@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.net.URL;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -31,10 +32,16 @@ import kr.ac.jbnu.se.awp.gitplay4.model.Login;
 
 @Controller
 public class PageController {
-
+	boolean flag = false;
+	String message = "";
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-
+	public String home(Model model, HttpServletRequest request) {
+		if(!flag) {
+			   String id = request.getParameter("id");
+			   model.addAttribute("id",id);
+			   System.out.println("id:"+ id );
+			   return "login";
+			   }
 		return "login";
 	}
 
@@ -47,15 +54,15 @@ public class PageController {
 	public String upload(@ModelAttribute Login login, HttpServletResponse resp) throws IOException {
 		String id = login.getId();
 		String password = login.getPassword();
-
 		UserManager manager = UserManager.getInstance();
-
+		HttpSession session = session();
+		
 		if (manager.isValid(id, password)) {
-			HttpSession session = session();
+			
 			session.setAttribute("id", id);
 			session.setAttribute("password", password);
-
 			System.out.println(session.getAttribute("id") + " " + session.getAttribute("password"));
+			session.setAttribute("message","");
 
 		} else {
 //			resp.setContentType("text/html; charset=utf-8");
@@ -63,6 +70,8 @@ public class PageController {
 //			PrintWriter writer = resp.getWriter();
 //			writer.println("<script>alert(\"올바른 ID와 패스워드가 아닙니다\")</script>");
 //			writer.flush();
+			flag = true;
+			session.setAttribute("message","올바른 ID와 패스워드가 아닙니다");
 			return "redirect:/";
 		}
 
