@@ -26,10 +26,14 @@
 					<input type="text" name="id" class="id" placeholder="아이디">
 				</div>
 				<div class="passForm">
-					<input type="text" name="password" class="pw" placeholder="패스워드"
+					<input type="password" name="password" class="pw" placeholder="패스워드"
 						autocomplete="off">
 				</div>
-
+				<div id="message">${message}</div>
+				<%
+				session.setAttribute("message", "");
+				%>
+				
 				<div id="submitbox">
 					<input type="submit" id="submit_button" value="로그인" />
 				</div>
@@ -37,9 +41,6 @@
 			</form>
 		</div>
 	</div>
-	<div>${message}</div>
-	<%
-	session.setAttribute("message", "");
-	%>
+
 </body>
 </html>

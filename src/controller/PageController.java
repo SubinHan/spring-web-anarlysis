@@ -43,7 +43,7 @@ public class PageController {
 			   System.out.println("id:"+ id );
 			   return "login";
 			   }
-		return "login";
+		return "select_charttype";
 	}
 
 	@RequestMapping(value = "registration", method = RequestMethod.GET)

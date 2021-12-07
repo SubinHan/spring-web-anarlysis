@@ -41,6 +41,12 @@
 	padding : 50px;
 }
 
+#message{
+	margin-top: 15px;
+	text-align: center;
+	font-size: 15px;
+	color: #E53935;
+}
 .idForm{
   border-bottom: 2px solid #adadad;
   margin: 30px;
@@ -102,4 +108,3 @@ input[type="submit"]{
 	box-shadow: none;
 	font-size: 15px;
 }
-
