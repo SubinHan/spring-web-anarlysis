@@ -22,32 +22,43 @@
 		<div class="flex_container">
 			
 			<div class="item">
-				<div class="bar_chart">
+				<div class="image">
 					<form action="SelectServlet" method="post">
-						<input type="button" class="bar_img" name="chatType" value="BAR">
+						<input type="submit" class="bar_img" value= " ">
+						<input type="hidden" name="chartType" value="BAR">
 					</form>
 				</div>
+				<div class="text">막대 그래프</div>
 			</div>
-
-			<div class="histogram">
-				<form action="SelectServlet" method="post">
-					<input type="submit" class="his_img"> <input type="hidden"
-						name="chartType" value="HISTOGRAM" />
-				</form>
+			
+			<div class="item">
+				<div class="image">
+					<form action="SelectServlet" method="post">
+						<input type="submit" class="his_img" value= " "> 
+						<input type="hidden" name="chartType" value="HISTOGRAM" />
+					</form>
+				</div>
+				<div class="text">히스토그램</div>
 			</div>
-
-			<div class="boxpolt">
-				<form action="SelectServlet" method="post">
-					<input type="submit" class="box_img"> <input type="hidden"
-						name="chartType" value="BOX" />
-				</form>
+			
+			<div class="item">
+				<div class="image">
+					<form action="SelectServlet" method="post">
+						<input type="submit" class="box_img" value=" "> 
+						<input type="hidden" name="chartType" value="BOX" />
+					</form>
+				</div>
+				<div class="text">상자 그래프</div>
 			</div>
-
-			<div class="linechart">
-				<form action="SelectServlet" method="post">
-					<input type="submit" class="line_img"> <input type="hidden"
-						name="chartType" value="LINE" />
-				</form>
+			
+			<div class="item">
+				<div class="image">
+					<form action="SelectServlet" method="post">
+						<input type="submit" class="line_img" value=" "> 
+						<input type="hidden" name="chartType" value="LINE" />
+					</form>
+				</div>
+				<div class="text">선 그래프</div>
 			</div>
 
 		</div>
