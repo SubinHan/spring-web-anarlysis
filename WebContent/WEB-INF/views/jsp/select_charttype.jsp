@@ -19,8 +19,9 @@
 
 		<div id="subtitle">원하시는 차트를 선택해주세요.</div>
 
-		<div class="form">
-			<div class="option">
+		<div class="flex_container">
+			
+			<div class="item">
 				<div class="bar_chart">
 					<form action="SelectServlet" method="post">
 						<input type="button" class="bar_img" name="chatType" value="BAR">

@@ -34,6 +34,7 @@ import kr.ac.jbnu.se.awp.gitplay4.model.Login;
 public class PageController {
 	boolean flag = false;
 	String message = "";
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, HttpServletRequest request) {
 		if(!flag) {
