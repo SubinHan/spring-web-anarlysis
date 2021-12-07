@@ -8,6 +8,8 @@ request.setCharacterEncoding("UTF-8");
 <html>
 <head>
 <meta charset="UTF-8">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <title>dynamic form</title>
 <link rel="stylesheet" href="css/dynamic.css">
 </head>
@@ -36,33 +38,31 @@ int givenColNum;
 				</div>
 
 				<div class="selectbox">
-					<label for= "xAxis">x축</label> 
-					<select name="xAxis">
-							<%
-							for (String name : givenColName) {
-							%>
-							<option><%=name%>
-							</option>
-							<%
-							}
-							%>
+					<label for="xAxis">x축</label> <select name="xAxis">
+						<%
+						for (String name : givenColName) {
+						%>
+						<option><%=name%>
+						</option>
+						<%
+						}
+						%>
 					</select>
 				</div>
 				<div class="selectbox">
-					<label for=yAxis>y축</label> 
-					<select name="yAxis">
-							<%
-							for (String name : givenColName) {
-							%>
-							<option><%=name%>
-							</option>
-							<%
-							}
-							%>
+					<label for=yAxis>y축</label> <select name="yAxis">
+						<%
+						for (String name : givenColName) {
+						%>
+						<option><%=name%>
+						</option>
+						<%
+						}
+						%>
 					</select>
 				</div>
 
-				<div class="rangeForm"> 			
+				<div class="rangeForm">
 					<input type="text" name="ymin" class="range" placeholder="최솟값">
 					~ <input type="text" name="ymax" class="range" placeholder="최댓값">
 				</div>
@@ -73,5 +73,18 @@ int givenColNum;
 			</form>
 		</div>
 	</div>
+	<script>
+		$(document).ready(function() {
+			var selectTarget = $('.selectbox select');
+			selectTarget.change(function() {
+				var select_name = $(this).children('option:selected').text();
+				const length = 25;
+				if(select_name.length > length){
+					select_name = select_name.substring(0,length) + '...';
+				}
+				$(this).siblings('label').text(select_name);
+			});
+		});
+	</script>
 </body>
 </html>

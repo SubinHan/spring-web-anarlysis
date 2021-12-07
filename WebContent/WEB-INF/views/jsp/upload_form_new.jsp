@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <title>Upload</title>
 <link rel="stylesheet" href="css/upload.css">
 </head>
@@ -23,11 +24,6 @@
 						name="multiPartServlet" multiple="multiple" />
 					</label>
 				</div>
-
-				<!-- 		파일선택: <input type="file" name="multiPartServlet" multiple="multiple"/>
-    			<div id="submitbox">
-        			<input type="submit" id="submit_button" value="Upload"/>
-        		</div>-->
 			</div>
 			<div id="submitbox">
 				<input type="submit" id="submit_button" value="Upload" />
@@ -37,5 +33,11 @@
 
 
 	</div>
+	<script>
+		$("#file").on('change', function() {
+			var fileName = $("#file").val();
+			$(".upload-name").val(fileName);
+		});
+	</script>
 </body>
 </html>

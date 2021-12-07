@@ -1,33 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+	pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Select chartType</title>
+<title>select_chart</title>
+<link rel="stylesheet" href="css/select.css">
+
 </head>
 <body>
-<h1>차트를 선택하세요.</h1>
-	
-	<form action="SelectServlet" method="post" >	
-		<input type="submit">
-		<input type="hidden" name="chartType" value="BAR" />
-	</form>
-	<form action="SelectServlet" method="post" >	
-		<input type="submit">
-		<input type="hidden" name="chartType" value="HISTOGRAM" />
-	</form>
-	<form action="SelectServlet" method="post" >	
-		<input type="submit">
-		<input type="hidden" name="chartType" value="PIE" />
-	</form>
-	<form action="SelectServlet" method="post" >	
-		<input type="submit">
-		<input type="hidden" name="chartType" value="BOX" />
-	</form>
-	<form action="SelectServlet" method="post" >	
-		<input type="submit">
-		<input type="hidden" name="chartType" value="LINE" />
-	</form>
+	<div id="image">
+		<img src="images/anarlysis.jpg" height=50px; width=auto;>
+	</div>
+
+	<div id="container">
+
+		<div id="title">어떤 차트가 필요하세요?</div>
+
+		<div id="subtitle">원하시는 차트를 선택해주세요.</div>
+
+		<div class="form">
+			<div class="option">
+				<div class="bar_chart">
+					<form action="SelectServlet" method="post">
+						<input type="button" class="bar_img" name="chatType" value="BAR">
+					</form>
+				</div>
+			</div>
+
+			<div class="histogram">
+				<form action="SelectServlet" method="post">
+					<input type="submit" class="his_img"> <input type="hidden"
+						name="chartType" value="HISTOGRAM" />
+				</form>
+			</div>
+
+			<div class="boxpolt">
+				<form action="SelectServlet" method="post">
+					<input type="submit" class="box_img"> <input type="hidden"
+						name="chartType" value="BOX" />
+				</form>
+			</div>
+
+			<div class="linechart">
+				<form action="SelectServlet" method="post">
+					<input type="submit" class="line_img"> <input type="hidden"
+						name="chartType" value="LINE" />
+				</form>
+			</div>
+
+		</div>
+
+
+
+	</div>
 </body>
 </html>

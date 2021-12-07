@@ -9,25 +9,37 @@
 <%@ page import="java.sql.*"%>
 
 <%
-String fullpath = FileManager.getRecentChartFile((String) session.getAttribute("id")).getPath();
+//String fullpath = FileManager.getRecentChartFile((String) session.getAttribute("id")).getPath();
 %>
 
 
 <title>Chart Generated!</title>
 <link rel="stylesheet" href="css/chart.css">
+
 </head>
 <body>
 	<div id="image">
 		<img src="images/anarlysis.jpg" height=50px; width=auto;>
 	</div>
+	
 	<div id="container">
+		
 		<div id="blank"></div>
+		
 		<div id="chart">
-			<img src="<%=fullpath%>" width=512 height=384></img>
+			<img src="images/test.png" width=512 height=384></img>
 		</div>
+			
+		<div id="download">
+			<button type="button" onclick="location.href='http://webtong.kr' ">다운로드</button>
+		</div>
+		
 		<div id="additional">
-			다른 차트도 필요하신가요? <a href="upload">새로운 차트 만들러 가기 ></a>
+			다른 차트도 필요하신가요? 
+			<br> <a href="select_charttype">차트 다시 선택하러 가기 ></a>
+			<br> <a href="upload">새로운 파일 업로드하러 가기 ></a>
 		</div>
+		
 	</div>
 </body>
 </html>
