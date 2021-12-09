@@ -1,1 +1,1 @@
-# spring-web-anarlysis
+# AnaRlysis
