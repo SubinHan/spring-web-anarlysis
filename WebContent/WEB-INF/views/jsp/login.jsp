@@ -16,11 +16,11 @@
 		<div id = "title">AnaRlysis 로그인</div>
 		
 		<div id = "subtitle">계정이 없으신가요?
-			<a href = "registration">새 계정 만들기 ></a>		
+			<a href = "./registration">새 계정 만들기 ></a>		
 		</div>
 	
 		<div id = "form">
-			<form action = "./upload" modelAttribute="login" method = "post">
+			<form action = "./login" modelAttribute="login" method = "post">
 			
 			<div class="idForm"> 
 				<input type = "text" name="id" class="id" placeholder="아이디">

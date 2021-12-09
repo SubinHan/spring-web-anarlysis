@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.OutputStream;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -14,60 +15,91 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import kr.ac.jbnu.se.awp.gitplay4.core.FileManager;
 import kr.ac.jbnu.se.awp.gitplay4.core.UserManager;
+import kr.ac.jbnu.se.awp.gitplay4.model.ChartType;
 import kr.ac.jbnu.se.awp.gitplay4.model.Login;
 
 @Controller
 public class PageController {
 
+	private static final String ATTRIBUTE_ID = "id";
+	private static final String ATTRIBUTE_PASSWORD = "password";
+	private static final String ATTRIBUTE_CHART_TYPE = "chartType";
+	
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-
+		return "redirect:/login";
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String getLogin(Locale locale, Model model, HttpServletRequest req) {
+		if(isValidAccess(req.getSession())) {
+			return "upload_form";
+		}
 		return "login";
 	}
 	
-	@RequestMapping(value="registration", method =RequestMethod.GET) 
+	@RequestMapping(value="/registration", method =RequestMethod.GET) 
 	public String registration() {
 		 return "registration";
 	}
 
-	@RequestMapping(value = "upload", method = RequestMethod.POST)
-	public String upload(@ModelAttribute Login login) {
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String upload(@ModelAttribute Login login, HttpServletRequest req) {
 		String id = login.getId();
 		String password = login.getPassword();
+		HttpSession session = req.getSession();
+		req.setAttribute(ATTRIBUTE_ID, id);
+		req.setAttribute(ATTRIBUTE_PASSWORD, password);
+		
 
-		UserManager manager = UserManager.getInstance();
-
-		if (manager.isValid(id, password)) {
-			HttpSession session = session();
-			session.setAttribute("id", id);
-			session.setAttribute("password", password);
-
-			System.out.println(session.getAttribute("id") + " " + session.getAttribute("password"));
-
+		if (isValidAccess(session)) {
+			return "upload_form";
 		} else {
-			System.out.println("Aa");
+//			session.setAttribute(ATTRIBUTE_ID, null);
+//			session.setAttribute(ATTRIBUTE_ID, null);
+//			return "redirect:/login";
+			return "upload_form";
 		}
-
-		return "upload_form_new";
 	}
 
-	@RequestMapping(value = "configuration", method = RequestMethod.POST)
-	public String configuration() {
-		return "dynamicform";
+	@RequestMapping(value = "/configuration", method = RequestMethod.POST)
+	public String configuration(HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		String chartType = req.getParameter("chartType");
+		
+		ChartType type = null;
+		switch(chartType) {
+		case "BAR":
+			type = ChartType.BAR;
+			break;
+		case "HISTOGRAM":
+			type = ChartType.HISTOGRAM;
+			break;
+		case "LINE":
+			type = ChartType.LINE;
+			break;
+		case "BOX":
+			type = ChartType.BOX;
+			break;
+		case "PIE":
+			type = ChartType.PIE;
+			break;
+		}
+		session.setAttribute(ATTRIBUTE_CHART_TYPE, type);
+		
+		return "configuration_form";
 	}
 	
-	@RequestMapping(value = "select", method = RequestMethod.POST)
+	@RequestMapping(value = "/select", method = RequestMethod.POST)
 	public String selectChart() {
-		
 		return "select_charttype";
 	}
 	
-	@RequestMapping(value = "download/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/download/{id}", method = RequestMethod.GET)
 	public void fileDownlad(@PathVariable(value = "id") String id, HttpServletResponse response) {
 		
 		System.out.println("aa" + id);
@@ -99,9 +131,15 @@ public class PageController {
         	ex.printStackTrace();
         }
 	}
-
-	public static HttpSession session() {
-		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-		return attr.getRequest().getSession(true); // true == allow create
+	
+	private boolean isValidAccess(HttpSession session) {
+		String id = (String) session.getAttribute("id");
+		String password = (String) session.getAttribute("password");
+		
+		if(id == null || password == null) {
+			return false;
+		}
+		
+		return UserManager.getInstance().isValid(id, password);
 	}
 }

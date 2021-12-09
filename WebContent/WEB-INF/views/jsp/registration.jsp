@@ -16,7 +16,7 @@
 		<div id="title">AnaRlysis 가입</div>
 
 		<div id="subtitle">
-			이미 사용 중인 계정이 있으신가요? <a href="./">AnaRlysis 계정으로 로그인하기 ></a>
+			이미 사용 중인 계정이 있으신가요? <a href="./login">AnaRlysis 계정으로 로그인하기 ></a>
 		</div>
 
 		<div id="form">

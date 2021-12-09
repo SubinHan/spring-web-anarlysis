@@ -32,7 +32,7 @@ public class LoginServlet extends HttpServlet {
 			
 			System.out.println(session.getAttribute("id") + " " + session.getAttribute("password"));
 			this.getServletContext().getRequestDispatcher("/upload.jsp").forward(req, resp);
-			
+
 		}
 		else {
 			System.out.println("Aa");
