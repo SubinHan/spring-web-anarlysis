@@ -59,10 +59,12 @@ public class ChartGenerator {
 
 			System.out.println("csv_data <- read.csv(" + rfilePath + ",header=TRUE)");
 			connection.eval("csv_data <- read.csv(" + rfilePath + ",header=TRUE)");
+			System.out.println("names(csv_data) <- gsub(\"[.]\",\" \",names(csv_data))");
+			connection.eval("names(csv_data) <- gsub(\"[.]\",\" \",names(csv_data))");
 			
 			if(ymax!=""&&ymin!="") {
-				System.out.println("csv_data <- subset(csv_data, "+yName+"<"+ymax+" & "+yName+">"+ymin+")");
-				connection.eval("csv_data <- subset(csv_data, "+yName+"<="+ymax+" & "+yName+">="+ymin+")");
+				System.out.println("csv_data <- subset(csv_data, "+yName+"<"+ymax+" & \""+yName+"\">"+ymin+")");
+				connection.eval("csv_data <- subset(csv_data, \""+yName+"\"<="+ymax+" & \""+yName+"\">="+ymin+")");
 			}
 			
 			connection.eval("library(ggplot2)");
@@ -96,16 +98,16 @@ public class ChartGenerator {
 		
 		switch (this.chartType) {
 		case LINE:
-			toReturn = "a<-csv_data%>% ggplot(aes(" + x + ", " + y + ", group=1))";
+			toReturn = "a<-csv_data%>% ggplot(aes(`"+x+"`, `"+y+"`, group=1))";
 			break;
 		case BAR:
-			toReturn = "a<-csv_data%>% ggplot(aes(" + y + ", group=1))";
+			toReturn = "a<-csv_data%>% ggplot(aes(`" + y + "`, group=1))";
 			break;
 		case HISTOGRAM:
-			toReturn = "a<-csv_data%>% ggplot(aes(" + y + ", group=1))";
+			toReturn = "a<-csv_data%>% ggplot(aes(`" + y + "`, group=1))";
 			break;
 		case BOX:
-			toReturn = "a<-csv_data%>% ggplot(aes(" + x + ", " + y + ", group=1))";
+			toReturn = "a<-csv_data%>% ggplot(aes(`" + x + "`, `" + y + "`, group=1))";
 			break;
 		default:
 			break;

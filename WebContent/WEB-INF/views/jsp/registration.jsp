@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <title>Registration</title>
 <link rel="stylesheet" href="css/login.css">
+<link
+	rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 </head>
 <body>
 	<div id="image">
@@ -26,10 +28,13 @@
 					<input type="text" name="id" class="id" placeholder="아이디">
 				</div>
 				<div class="passForm">
-					<input type="text" name="password" class="pw" placeholder="패스워드" autocomplete="off">
+					<input type="password" name="password" class="pw"
+						placeholder="패스워드" autocomplete="off">
 				</div>
+
 				<div class="passForm">
-					<input type="text" name="passwordConfirm" class="pw" placeholder="패스워드 확인" autocomplete="off">
+					<input type="password" name="passwordConfirm" class="pw"
+						placeholder="패스워드 확인" autocomplete="off">
 				</div>
 
 				<div id="submitbox">
@@ -38,5 +43,6 @@
 
 			</form>
 		</div>
+	</div>
 </body>
 </html>

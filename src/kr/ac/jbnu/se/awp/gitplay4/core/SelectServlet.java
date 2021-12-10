@@ -45,4 +45,8 @@ public class SelectServlet  extends HttpServlet{
 		this.getServletContext().getRequestDispatcher("/configuration").forward(req, resp);
 	}
 	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		this.getServletContext().getRequestDispatcher("/configuration").forward(req, resp);
+	}
 }

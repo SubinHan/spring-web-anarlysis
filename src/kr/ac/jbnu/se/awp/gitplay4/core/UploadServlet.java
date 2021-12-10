@@ -23,6 +23,13 @@ public class UploadServlet extends HttpServlet {
 
 		this.getServletContext().getRequestDispatcher("/select").forward(req, resp);
 	} // doPost()
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+
+		this.getServletContext().getRequestDispatcher("/select").forward(req, resp);
+	}
 	
 	
 

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="javax.servlet.http.HttpServletRequest, java.io.File, kr.ac.jbnu.se.awp.gitplay4.core.*"%>
+	import="javax.servlet.http.HttpServletRequest, java.io.File, kr.ac.jbnu.se.awp.gitplay4.core.*, kr.ac.jbnu.se.awp.gitplay4.model.ChartType"%>
 <%
 request.setCharacterEncoding("UTF-8");
 %>
@@ -8,6 +8,8 @@ request.setCharacterEncoding("UTF-8");
 <html>
 <head>
 <meta charset="UTF-8">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <title>dynamic form</title>
 <link rel="stylesheet" href="css/dynamic.css">
 </head>
@@ -18,6 +20,8 @@ CsvAnalyzer analyzer = new CsvAnalyzer(csvFile.getPath(), true);
 String[] givenColName;
 givenColName = analyzer.getColumnNames();
 int givenColNum;
+
+
 %>
 <body>
 	<div id="image">
@@ -29,40 +33,41 @@ int givenColNum;
 		<div id="subtitle">차트 생성을 위해 필요한 옵션을 입력해주세요.</div>
 
 		<div id="form">
-			<form method="post" action="DynamicFormExServlet">
+			<form method="post" action="generate">
 
 				<div class="chartNameForm">
 					<input type="text" name="chartName" class="id" placeholder="차트 이름">
 				</div>
+				<%ChartType type = (ChartType)session.getAttribute("chartType");%>
+				<%if(type.toString().equals("LINE")||type.toString().equals("BOX")){ %>
 
 				<div class="selectbox">
-					<label for= "xAxis">x축</label> 
-					<select name="xAxis">
-							<%
-							for (String name : givenColName) {
-							%>
-							<option><%=name%>
-							</option>
-							<%
-							}
-							%>
+					<label for="xAxis">x축</label> <select name="xAxis">
+						<%
+						for (String name : givenColName) {
+						%>
+						<option><%=name%>
+						</option>
+						<%
+						}
+						%>
 					</select>
 				</div>
+				<%}%>
 				<div class="selectbox">
-					<label for=yAxis>y축</label> 
-					<select name="yAxis">
-							<%
-							for (String name : givenColName) {
-							%>
-							<option><%=name%>
-							</option>
-							<%
-							}
-							%>
+					<label for=yAxis>y축</label> <select name="yAxis">
+						<%
+						for (String name : givenColName) {
+						%>
+						<option><%=name%>
+						</option>
+						<%
+						}
+						%>
 					</select>
 				</div>
 
-				<div class="rangeForm"> 			
+				<div class="rangeForm">
 					<input type="text" name="ymin" class="range" placeholder="최솟값">
 					~ <input type="text" name="ymax" class="range" placeholder="최댓값">
 				</div>
@@ -73,5 +78,18 @@ int givenColNum;
 			</form>
 		</div>
 	</div>
+	<script>
+		$(document).ready(function() {
+			var selectTarget = $('.selectbox select');
+			selectTarget.change(function() {
+				var select_name = $(this).children('option:selected').text();
+				const length = 25;
+				if(select_name.length > length){
+					select_name = select_name.substring(0,length) + '...';
+				}
+				$(this).siblings('label').text(select_name);
+			});
+		});
+	</script>
 </body>
 </html>
