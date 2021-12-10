@@ -26,7 +26,7 @@
 		<div id="blank"></div>
 
 		<div id="chart">
-			<img src="images" width=512 height=384></img>
+			<img src="images/generatedChart" width=512 height=384></img>
 		</div>
 
 		<div id="download">

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.ac.jbnu.se.awp.gitplay4.model.RegistrationException;
+
 @WebServlet(name = "RegistrationServlet", urlPatterns = { "/RegistrationServlet" })
 public class RegistrationServlet extends HttpServlet {
 
@@ -19,21 +21,22 @@ public class RegistrationServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		String id = req.getParameter("id");
 		String password = req.getParameter("password");
 		
 		UserManager manager = UserManager.getInstance();
 		
+		try {
 		manager.registerUser(id, password);
-		
+		}
+		catch (RegistrationException e) {
+			e.printStackTrace();
+		}
 	
 		PrintWriter writer = resp.getWriter();
 		writer.println("<script>alert('Registering User Success!'); location.href=\"./\"; </script>");
-		writer.close();
-//			
-//		this.getServletContext().getRequestDispatcher("/").forward(req, resp);
-		
+		writer.close();		
 	}
 
 }

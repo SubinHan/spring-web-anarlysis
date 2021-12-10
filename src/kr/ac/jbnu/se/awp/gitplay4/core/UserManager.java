@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import kr.ac.jbnu.se.awp.gitplay4.model.RegistrationException;
+
 public class UserManager {
 	private static UserManager instance;
 	private Connection conn;
@@ -52,12 +54,12 @@ public class UserManager {
 	}
 
 	// User Registration
-	public boolean registerUser(String id, String password) {
+	public void registerUser(String id, String password) throws RegistrationException {
 		if (hasId(id)) {
-			return false;
+			throw new RegistrationException("id already exists");
 		}
 		if (id == null)
-			return false;
+			throw new RegistrationException("id is null");
 
 		PreparedStatement pstmt = null;
 
@@ -70,10 +72,8 @@ public class UserManager {
 
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			System.out.println(e);
+			throw new RegistrationException("sql exception", e);
 		}
-
-		return true;
 	}
 
 	// User Validity Check

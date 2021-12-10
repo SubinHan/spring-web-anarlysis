@@ -27,6 +27,7 @@ import kr.ac.jbnu.se.awp.gitplay4.core.r.ChartGeneratorBuilder;
 import kr.ac.jbnu.se.awp.gitplay4.core.r.ChartGeneratorBuilderFactory;
 import kr.ac.jbnu.se.awp.gitplay4.model.ChartType;
 import kr.ac.jbnu.se.awp.gitplay4.model.Login;
+import kr.ac.jbnu.se.awp.gitplay4.model.RegistrationException;
 
 @Controller
 public class PageController {
@@ -35,25 +36,18 @@ public class PageController {
 	private static final String ATTRIBUTE_ID = "id";
 	private static final String ATTRIBUTE_PASSWORD = "password";
 	private static final String ATTRIBUTE_CHART_TYPE = "chartType";
-	
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String getHomePage(Locale locale, Model model) {
 		return "redirect:/login";
 	}
-	
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String getLoginPage(Locale locale, Model model, HttpServletRequest req) {
-		if(isValidAccess(req.getSession())) {
+		if (isValidAccess(req.getSession())) {
 			return "redirect:/upload";
 		}
 		return "login";
-	}
-	
-
-	@RequestMapping(value = "/registration", method = RequestMethod.GET)
-	public String getRegestrationPage() {
-		return "registration";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -63,7 +57,6 @@ public class PageController {
 		HttpSession session = req.getSession();
 		req.setAttribute(ATTRIBUTE_ID, id);
 		req.setAttribute(ATTRIBUTE_PASSWORD, password);
-		
 
 		if (isValidAccess(session)) {
 			return "redirect:/upload";
@@ -75,23 +68,29 @@ public class PageController {
 			return "redirect:/upload";
 		}
 	}
-	
+
+	@RequestMapping(value = "/registration", method = RequestMethod.GET)
+	public String getRegestrationPage() {
+		return "registration";
+	}
+
+	@RequestMapping(value = "/registration", method = RequestMethod.POST)
+	public String registration(@RequestParam(name = "id") String id, @RequestParam(name = "password") String password,
+			@RequestParam(name = "passwordConfirm") String passwordConfirm) {
+
+		UserManager manager = UserManager.getInstance();
+		try {
+			manager.registerUser(id, password);
+		} catch (RegistrationException e) {
+			e.printStackTrace();
+			return "registration";
+		}
+		return "login";
+	}
+
 	@RequestMapping(value = "/upload", method = RequestMethod.GET)
 	public String getUploadPage() {
 		return "upload_form";
-	}
-	
-	@RequestMapping(value = "/images", method = RequestMethod.GET)
-	public void setImageFileById(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		System.out.println("Image writing..");
-		String id = (String) req.getSession().getAttribute("id");
-		File file = FileManager.getRecentChartFile(id);
-		String filePath = file.getPath();
-		String url = "file:///" + filePath;
-		URL fileUrl = new URL(url);
-		System.out.println(url);
-		fileUrl.openStream().transferTo(resp.getOutputStream());
-		System.out.println("Image Wrote");
 	}
 
 	@RequestMapping(value = "generate", method = RequestMethod.POST)
@@ -143,7 +142,7 @@ public class PageController {
 			break;
 		}
 		session.setAttribute(ATTRIBUTE_CHART_TYPE, type);
-		
+
 		return "configuration_form";
 	}
 
@@ -157,7 +156,6 @@ public class PageController {
 
 		return "select_charttype";
 	}
-
 
 	@RequestMapping(value = "/download/{id}", method = RequestMethod.GET)
 	public void fileDownlad(@PathVariable(value = "id") String id, HttpServletResponse response) {
@@ -191,15 +189,15 @@ public class PageController {
 			ex.printStackTrace();
 		}
 	}
-	
+
 	private boolean isValidAccess(HttpSession session) {
 		String id = (String) session.getAttribute("id");
 		String password = (String) session.getAttribute("password");
-		
-		if(id == null || password == null) {
+
+		if (id == null || password == null) {
 			return false;
 		}
-		
+
 		return UserManager.getInstance().isValid(id, password);
 	}
 }

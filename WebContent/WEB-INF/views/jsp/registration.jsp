@@ -22,7 +22,7 @@
 		</div>
 
 		<div id="form">
-			<form action="RegistrationServlet" method="post">
+			<form action="registration" method="post">
 
 				<div class="idForm">
 					<input type="text" name="id" class="id" placeholder="아이디">
